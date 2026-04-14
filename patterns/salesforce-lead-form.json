@@ -1,0 +1,6 @@
+{
+  "__file": "wp_block",
+  "title": "Salesforce Lead Form",
+  "content": "<!-- wp:jetpack/contact-form {\"formTitle\":\"Salesforce Lead Form\"} -->\n\t\t\t\t\t<div class=\"wp-block-jetpack-contact-form\">\n\t\t\t\t\t\t<!-- wp:jetpack/field-name {\"label\":\"First Name\",\"required\":true,\"id\":\"first_name\"} /-->\n\t\t\t\t\t\t<!-- wp:jetpack/field-name {\"label\":\"Last Name\",\"required\":true,\"id\":\"last_name\"} /-->\n\t\t\t\t\t\t<!-- wp:jetpack/field-email {\"label\":\"Email\",\"required\":true,\"id\":\"email\"} /-->\n\t\t\t\t\t\t<!-- wp:jetpack/field-telephone {\"label\":\"Phone\",\"id\":\"phone\"} /-->\n\t\t\t\t\t\t<!-- wp:jetpack/field-text {\"label\":\"Company\",\"id\":\"company\"} /-->\n\t\t\t\t\t\t<!-- wp:jetpack/field-text {\"label\":\"Job Title\",\"id\":\"title\"} /-->\n\t\t\t\t\t\t<!-- wp:button {\"tagName\":\"button\",\"type\":\"submit\"} -->\n\t\t\t\t\t\t\t<div class=\"wp-block-button\"><button type=\"submit\" class=\"wp-block-button__link wp-element-button\">Submit</button></div>\n\t\t\t\t\t\t<!-- /wp:button -->\n\t\t\t\t\t</div>\n\t\t\t\t\t<!-- /wp:jetpack/contact-form -->",
+  "syncStatus": "unsynced"
+}

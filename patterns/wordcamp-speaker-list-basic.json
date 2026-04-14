@@ -1,0 +1,6 @@
+{
+  "__file": "wp_block",
+  "title": "Basic speaker list",
+  "content": "<!-- wp:query {\"queryId\":4,\"query\":{\"perPage\":99,\"pages\":0,\"offset\":0,\"postType\":\"wcb_speaker\",\"order\":\"asc\",\"orderBy\":\"title\",\"author\":\"\",\"search\":\"\",\"exclude\":[],\"sticky\":\"\",\"inherit\":false},\"namespace\":\"wordcamp/speakers-query\",\"layout\":{\"inherit\":false}} -->\n<div class=\"wp-block-query\"><!-- wp:post-template -->\n<!-- wp:wordcamp/avatar {\"align\":\"center\",\"className\":\"is-style-rounded\"} /-->\n\n<!-- wp:post-title {\"textAlign\":\"center\"} /-->\n\n<!-- wp:group {\"layout\":{\"inherit\":true,\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group\"><!-- wp:read-more {\"content\":\"Read More\"} /--></div>\n<!-- /wp:group -->\n\n<!-- wp:spacer {\"height\":\"50px\"} -->\n<div style=\"height:50px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>\n<!-- /wp:spacer -->\n\n<!-- wp:separator {\"opacity\":\"css\"} -->\n<hr class=\"wp-block-separator has-css-opacity\"/>\n<!-- /wp:separator -->\n\n<!-- wp:spacer {\"height\":\"50px\"} -->\n<div style=\"height:50px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>\n<!-- /wp:spacer -->\n<!-- /wp:post-template --></div>\n<!-- /wp:query -->\n",
+  "syncStatus": "unsynced"
+}

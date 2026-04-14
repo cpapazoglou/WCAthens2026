@@ -1,0 +1,6 @@
+{
+  "__file": "wp_block",
+  "title": "Portfolio single post template",
+  "content": "\n<!-- wp:template-part {\"slug\":\"header\",\"area\":\"header\",\"tagName\":\"header\",\"theme\":\"twentytwentyfour\"} /-->\n\n<!-- wp:group {\"tagName\":\"main\",\"align\":\"full\",\"layout\":{\"type\":\"constrained\"}} -->\n<main class=\"wp-block-group alignfull\">\n\t<!-- wp:spacer {\"height\":\"var:preset|spacing|40\"} -->\n\t<div style=\"height:var(--wp--preset--spacing--40)\" aria-hidden=\"true\" class=\"wp-block-spacer\">\n\t</div>\n\t<!-- /wp:spacer -->\n\n\t<!-- wp:post-featured-image {\"align\":\"wide\",\"style\":{\"spacing\":{\"margin\":{\"bottom\":\"var:preset|spacing|20\"}}}} /-->\n\n\t<!-- wp:group {\"align\":\"wide\",\"layout\":{\"type\":\"constrained\",\"justifyContent\":\"left\"}} -->\n\t<div class=\"wp-block-group alignwide\">\n\t\t<!-- wp:template-part {\"slug\":\"post-meta\",\"theme\":\"twentytwentyfour\"} /-->\n\t</div>\n\t<!-- /wp:group -->\n\n\t<!-- wp:spacer {\"height\":\"var:preset|spacing|40\"} -->\n\t<div style=\"height:var(--wp--preset--spacing--40)\" aria-hidden=\"true\" class=\"wp-block-spacer\">\n\t</div>\n\t<!-- /wp:spacer -->\n\n</main>\n<!-- /wp:group -->\n\n<!-- wp:template-part {\"slug\":\"footer\",\"area\":\"footer\",\"tagName\":\"footer\",\"theme\":\"twentytwentyfour\"} /-->\n",
+  "syncStatus": "unsynced"
+}

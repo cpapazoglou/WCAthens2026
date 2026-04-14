@@ -1,0 +1,6 @@
+{
+  "__file": "wp_block",
+  "title": "Post meta",
+  "content": "\n<!-- wp:group {\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group\">\n\t<!-- wp:group {\"style\":{\"spacing\":{\"blockGap\":\"0.3em\"}},\"layout\":{\"type\":\"flex\",\"justifyContent\":\"left\"}} -->\n\t<div class=\"wp-block-group\">\n\t\t<!-- wp:post-date {\"format\":\"M j, Y\",\"isLink\":true} /-->\n\n\t\t<!-- wp:paragraph {\"textColor\":\"contrast-2\"} -->\n\t\t<p class=\"has-contrast-2-color has-text-color\">—</p>\n\t\t<!-- /wp:paragraph -->\n\n\t\t<!-- wp:paragraph {\"fontSize\":\"small\",\"textColor\":\"contrast-2\"} -->\n\t\t<p class=\"has-small-font-size has-contrast-2-color has-text-color\">by</p>\n\t\t<!-- /wp:paragraph -->\n\n\t\t<!-- wp:post-author-name {\"isLink\":true} /-->\n\n\t\t<!-- wp:post-terms {\"term\":\"category\",\"prefix\":\"in \"} /-->\n\n\t</div>\n\t<!-- /wp:group -->\n</div>\n<!-- /wp:group -->\n",
+  "syncStatus": "unsynced"
+}

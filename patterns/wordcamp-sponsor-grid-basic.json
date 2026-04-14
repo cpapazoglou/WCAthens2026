@@ -1,0 +1,6 @@
+{
+  "__file": "wp_block",
+  "title": "Basic sponsor grid",
+  "content": "<!-- wp:query {\"queryId\":2,\"query\":{\"perPage\":10,\"pages\":0,\"offset\":0,\"postType\":\"wcb_sponsor\",\"order\":\"asc\",\"orderBy\":\"title\",\"author\":\"\",\"search\":\"\",\"exclude\":[],\"sticky\":\"\",\"inherit\":false},\"displayLayout\":{\"type\":\"flex\",\"columns\":3},\"namespace\":\"wordcamp/sponsors-query\"} -->\n<div class=\"wp-block-query\"><!-- wp:post-template -->\n<!-- wp:post-featured-image {\"isLink\":true,\"aspectRatio\":\"16/9\",\"scale\":\"contain\"} /-->\n<!-- /wp:post-template --></div>\n<!-- /wp:query -->\n",
+  "syncStatus": "unsynced"
+}

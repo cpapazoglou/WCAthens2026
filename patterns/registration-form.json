@@ -1,0 +1,6 @@
+{
+  "__file": "wp_block",
+  "title": "Registration Form",
+  "content": "<!-- wp:jetpack/contact-form {\"subject\":\"A new registration from your website\"} -->\n                    <div class=\"wp-block-jetpack-contact-form\">\n                        <!-- wp:jetpack/field-name {\"required\":true} /-->\n                        <!-- wp:jetpack/field-email {\"required\":true} /-->\n                        <!-- wp:jetpack/field-telephone {\"label\":\"Phone Number\"} /-->\n                        <!-- wp:jetpack/field-select {\"label\":\"How did you hear about us?\",\"options\":[\"Search Engine\",\"Social Media\",\"TV\",\"Radio\",\"Friend or Family\"]} /-->\n                        <!-- wp:jetpack/field-textarea {\"label\":\"Other Details\"} /-->\n\t\t\t\t\t\t<!-- wp:button {\"tagName\":\"button\",\"type\":\"submit\"} -->\n\t\t\t\t\t\t\t<div class=\"wp-block-button\"><button type=\"submit\" class=\"wp-block-button__link wp-element-button\">Send</button></div>\n\t\t\t\t\t\t<!-- /wp:button -->\n                    </div>\n                    <!-- /wp:jetpack/contact-form -->",
+  "syncStatus": "unsynced"
+}

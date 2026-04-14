@@ -1,0 +1,6 @@
+{
+  "__file": "wp_block",
+  "title": "404",
+  "content": "\n<!-- wp:heading {\"level\":1} -->\n<h1 class=\"wp-block-heading\" id=\"page-not-found\">Page Not Found</h1>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p>The page you are looking for does not exist, or it has been moved. Please try searching using the form below.</p>\n<!-- /wp:paragraph -->\n<!-- wp:search {\"label\":\"Search\",\"showLabel\":false,\"buttonText\":\"Search\",\"fontSize\":\"medium\",\"metadata\":{\"patternName\":\"twentytwentyfour/hidden-search\",\"name\":\"Search\"}} /-->\n",
+  "syncStatus": "unsynced"
+}

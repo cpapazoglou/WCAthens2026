@@ -1,0 +1,6 @@
+{
+  "__file": "wp_block",
+  "title": "Lead Capture Form",
+  "content": "<!-- wp:jetpack/contact-form -->\n                    <div class=\"wp-block-jetpack-contact-form\">\n                        <!-- wp:jetpack/field-name {\"required\":true} /-->\n                        <!-- wp:jetpack/field-email {\"required\":true} /-->\n                        <!-- wp:jetpack/field-consent /-->\n\t\t\t\t\t\t<!-- wp:button {\"tagName\":\"button\",\"type\":\"submit\"} -->\n\t\t\t\t\t\t\t<div class=\"wp-block-button\"><button type=\"submit\" class=\"wp-block-button__link wp-element-button\">Subscribe</button></div>\n\t\t\t\t\t\t<!-- /wp:button -->\n                    </div>\n                    <!-- /wp:jetpack/contact-form -->",
+  "syncStatus": "unsynced"
+}

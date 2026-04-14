@@ -1,0 +1,6 @@
+{
+  "__file": "wp_block",
+  "title": "Portfolio hero",
+  "content": "\n<!-- wp:spacer {\"height\":\"var:preset|spacing|50\",\"style\":{\"layout\":[]}} -->\n<div style=\"height:var(--wp--preset--spacing--50)\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>\n<!-- /wp:spacer -->\n\n<!-- wp:group {\"align\":\"wide\",\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group alignwide\">\n\t<!-- wp:heading {\"level\":1,\"align\":\"wide\",\"style\":{\"typography\":{\"lineHeight\":\"1.2\"}},\"fontSize\":\"xx-large\"} -->\n\t<h1 class=\"wp-block-heading alignwide has-xx-large-font-size\" style=\"line-height:1.2\">I’m <em>Leia Acosta</em>, a passionate photographer who finds inspiration in capturing the fleeting beauty of life.</h1>\n\t<!-- /wp:heading -->\n</div>\n<!-- /wp:group -->\n",
+  "syncStatus": "unsynced"
+}

@@ -1,0 +1,6 @@
+{
+  "__file": "wp_block",
+  "title": "Centered header with menu",
+  "content": "<!-- wp:group {\"align\":\"full\"} -->\n<div class=\"wp-block-group alignfull\"><!-- wp:site-title {\"textAlign\":\"center\",\"style\":{\"typography\":{\"fontSize\":\"3rem\"}}} /-->\n\n<!-- wp:paragraph {\"align\":\"center\"} -->\n<p class=\"has-text-align-center\">November 16–17. 2023 • City Conference Center</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:spacer {\"height\":\"20px\"} -->\n<div style=\"height:20px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>\n<!-- /wp:spacer -->\n\n<!-- wp:separator {\"opacity\":\"css\",\"className\":\"alignfull is-style-wide\"} -->\n<hr class=\"wp-block-separator has-css-opacity alignfull is-style-wide\"/>\n<!-- /wp:separator -->\n\n<!-- wp:navigation {\"layout\":{\"type\":\"flex\",\"justifyContent\":\"center\"}} /-->\n\n<!-- wp:separator {\"opacity\":\"css\",\"className\":\"alignfull is-style-wide\"} -->\n<hr class=\"wp-block-separator has-css-opacity alignfull is-style-wide\"/>\n<!-- /wp:separator --></div>\n<!-- /wp:group -->\n",
+  "syncStatus": "unsynced"
+}

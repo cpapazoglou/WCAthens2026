@@ -1,0 +1,6 @@
+{
+  "__file": "wp_block",
+  "title": "Search",
+  "content": "\n<!-- wp:search {\"label\":\"Search\",\"showLabel\":false,\"buttonText\":\"Search\",\"fontSize\":\"medium\"} /-->\n",
+  "syncStatus": "unsynced"
+}
