@@ -255,7 +255,7 @@ ul.organizers-index li a {
 
 /*--- latest news home ---*/
 .latest-news-home {
-	background: url('/files/2024/01/Yellow-Latest-News-Top.png') right top no-repeat, url('/files/2024/01/Yellow-Latest-News.png') left 45px bottom no-repeat;
+	background: url('https://i0.wp.com/europe.wordcamp.org/2024/files/2024/01/Yellow-Latest-News-Top.png') right top no-repeat, url('/files/2026/04/Yellow-Latest-News.png') left 45px bottom no-repeat;
 	background-size: 50%, 250px;
 }
 
@@ -381,7 +381,7 @@ ul.organizers-index li a {
 	left: 0;
 	width: 100%;
 	height: 100px; /* Adjust with the over image */
-	background-image: url('/files/2024/01/Organizer-Border-Pink.png');
+	background-image: url('/files/2026/04/Organizer-Border-Pink.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -407,7 +407,7 @@ ul.organizers-index li a {
 	left: 0;
 	width: 100%;
 	height: 100px; /* Adjust with the over image */
-	background-image: url('/files/2024/01/Organizer-Shape-Yellow.png');
+	background-image: url('/files/2026/04/Organizer-Shape-Yellow.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -420,7 +420,7 @@ ul.organizers-index li a {
 
 /*--- footer ---*/
 .big-footer {
-	background: url('/files/2024/01/Footer-Orange-Abstract-Shapes-34.png') right 750px bottom no-repeat, url('/files/2024/01/Footer-Pink-Abstract-Shapes-31.png') right -5px bottom no-repeat;
+	background: url('/files/2026/04/Footer-Orange-Abstract-Shapes-34.png') right 750px bottom no-repeat, url('/files/2026/04/Footer-Pink-Abstract-Shapes-31.png') right -5px bottom no-repeat;
 	background-size: 120px, 480px;
 }
 
@@ -445,7 +445,7 @@ ul.organizers-index li a {
 	}
 
 	.big-footer {
-		background: url('/files/2024/01/Footer-Orange-Abstract-Shapes-34.png') right 750px bottom no-repeat, url('/files/2024/01/Footer-Pink-Abstract-Shapes-31.png') right -5px bottom no-repeat;
+		background: url('/files/2026/04/Footer-Orange-Abstract-Shapes-34.png') right 750px bottom no-repeat, url('/files/2026/04/Footer-Pink-Abstract-Shapes-31.png') right -5px bottom no-repeat;
 		background-color: rgba(0, 0, 0, 0);
 		background-size: auto, auto;
 		background-size: 120px, 480px;
@@ -908,7 +908,7 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 	left: 0;
 	width: 100%;
 	height: 100px; /* Adjust with the over image */
-	background-image: url('/files/2024/01/Organizer-Border-Pink.png');
+	background-image: url('/files/2026/04/Organizer-Border-Pink.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 }
