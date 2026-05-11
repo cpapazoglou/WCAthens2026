@@ -184,9 +184,9 @@ h4.has-text-align-right.view-all-underline:hover, .session-single-details .taxon
 } /* End of media rule @media (max-width:767px) */
 
 /*-- Global buttons --*/
-/* .cta-button a:hover {
+.cta-button a:hover {
 	background-color: #FDEFE9 !important;
-} */
+}
 
 .primary-button-yellow a:hover {
 	background-color: #Fff !important;
@@ -198,14 +198,14 @@ h4.has-text-align-right.view-all-underline:hover, .session-single-details .taxon
 	border: 2px solid #F9B233 !important;
 }
 
-/* .wp-element-button:hover,
+.wp-element-button:hover,
 .wp-block-button__link:hover {
-	background-color: #fff;
-	border: 3px solid #f9b233;
-	color: #1f1f1f;
+	background-color: #1333A6;
+	border: 3px solid #1333A6;
+	color: #fff;
 }
 
-.wp-element-button,
+/* .wp-element-button,
 .wp-block-button__link {
 	border: 3px solid #f9b233;
 } */
