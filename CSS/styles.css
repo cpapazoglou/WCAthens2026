@@ -198,7 +198,7 @@ h4.has-text-align-right.view-all-underline:hover, .session-single-details .taxon
 	border: 2px solid #F9B233 !important;
 }
 
-.wp-block-buttons.is-style-outline .wp-block-button__link:hover {
+.wp-block-button.is-style-outline .wp-block-button__link:hover {
   background-color: #1333A6 !important;
 	border: 3px solid #1333A6 !important;
 	color: #fff !important;
