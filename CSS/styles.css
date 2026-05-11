@@ -198,17 +198,11 @@ h4.has-text-align-right.view-all-underline:hover, .session-single-details .taxon
 	border: 2px solid #F9B233 !important;
 }
 
-.wp-element-button:hover,
-.wp-block-button__link:hover {
-	background-color: #1333A6;
-	border: 3px solid #1333A6;
-	color: #fff;
+.wp-block-buttons.is-style-color-grid-buttons .wp-block-button__link:hover {
+  background-color: #1333A6 !important;
+	border: 3px solid #1333A6 !important;
+	color: #fff !important;
 }
-
-/* .wp-element-button,
-.wp-block-button__link {
-	border: 3px solid #f9b233;
-} */
 
 .button-sponsor-website a {
 	background-color: var(--wp--preset--color--custom-trinidad-100) !important;
