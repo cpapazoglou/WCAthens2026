@@ -1132,3 +1132,17 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 .page-slug-volunteers .tix-attendee-list .avatar {
 	width: 50px !important;
 }
+
+/* Language switching*/
+/* Hide the English version of the page by default */
+.lang-en {
+  display: none;
+}
+/* Hide the Greek version of the page when on the English page*/
+body.page-slug-en .lang-el {
+  display: none;
+}
+/* Show the English version of the page when on the English page*/
+body.page-slug-en .lang-en {
+  display: block;
+}
