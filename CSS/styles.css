@@ -1144,5 +1144,5 @@ body.page-slug-en .lang-el {
 }
 /* Show the English version of the page when on the English page*/
 body.page-slug-en .lang-en {
-  display: block;
+  display: flex;
 }
