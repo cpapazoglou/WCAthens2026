@@ -74,18 +74,23 @@ h4.has-text-align-right.view-all-underline:hover, .session-single-details .taxon
 	}
 
 	/*-- responsive ticket table --*/
-	.tix_tickets_table table, thead, tbody, th, td, tr {
+	.tix_tickets_table table,
+  .tix_tickets_table thead, 
+  .tix_tickets_table tbody,
+  .tix_tickets_table th,
+  .tix_tickets_table td,
+  .tix_tickets_table tr {
 		display: block;
 	}
 
 	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr {
+	.tix_tickets_table thead tr {
 		position: absolute;
 		top: -9999px;
 		left: -9999px;
 	}
 
-	td {
+	.tix_tickets_table td {
 		/* Behave  like a "row" */
 		border: 0px;
 		position: relative;
