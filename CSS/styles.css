@@ -1147,6 +1147,7 @@ body.page-slug-en .lang-el {
 body.page-slug-en .lang-en {
   display: block;
 }
-body.page-slug-en .is-layout-flex.lang-en {
+body.page-slug-en .is-layout-flex.lang-en,
+body.page-slug-en .wp-block-navigation__container.lang-en {
   display: flex;
 }
