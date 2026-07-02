@@ -230,6 +230,10 @@ h4.has-text-align-right.view-all-underline:hover, .session-single-details .taxon
 }
 
 .wp-block-buttons:not(.is-style-color-grid-buttons) .wp-block-button__link:hover {
+  color: var(--wp--preset--color--custom-trinidad-100) !important;
+}
+
+.wp-block-buttons.is-style-outline:not(.is-style-color-grid-buttons) .wp-block-button__link:hover {
   color: #fff !important;
 }
 
