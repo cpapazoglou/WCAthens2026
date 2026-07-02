@@ -1135,7 +1135,8 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 
 /* Language switching*/
 /* Hide the English version of the page by default */
-.lang-en {
+.lang-en,
+.is-layout-flex.lang-en {
   display: none;
 }
 /* Hide the Greek version of the page when on the English page*/
@@ -1144,5 +1145,8 @@ body.page-slug-en .lang-el {
 }
 /* Show the English version of the page when on the English page*/
 body.page-slug-en .lang-en {
+  display: block;
+}
+body.page-slug-en .is-layout-flex.lang-en {
   display: flex;
 }
