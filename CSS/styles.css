@@ -1155,3 +1155,90 @@ body.page-slug-en .is-layout-flex.lang-en,
 body.page-slug-en .wp-block-navigation__container.lang-en {
   display: flex;
 }
+
+/*--- ORGANIZER CARDS (reusable component) ---*/
+/* 2026/07 by Claude — Match WCA2026 Figma "Member Cards" (node 385:1949, 1399x448,
+   photo flush-left, padded text). Scoped to the .wcb_organizer block only, so it
+   applies to every Organizers block instance site-wide — no page-id / page-slug. */
+
+/* The card box */
+.wcb_organizer > .wp-block-columns {
+	gap: clamp(1rem, 2.5vw, 1.75rem);  /* breathing room between photo and text */
+	align-items: stretch;          /* photo fills the full card height */
+	overflow: hidden;              /* clip the photo to the card edges */
+	/* Lets the white card read as a box on a white page. NOTE: the design gets this
+	   from a cream SECTION background instead — if we set that at the page/group
+	   level in the Site Editor, this shadow can be removed. */
+	box-shadow: 0 4px 24px rgba(13, 38, 107, 0.08);
+}
+
+/* Photo column — design ratio 448/1399 ≈ 32% */
+.wcb_organizer > .wp-block-columns > .wp-block-column:first-child {
+	flex: 0 0 32%;
+	align-self: stretch;
+}
+
+/* Photo fills the column flush, no distortion (live currently uses object-fit:fill) */
+.wcb_organizer .wp-block-wordcamp-avatar {
+	width: 100% !important;
+	height: 100% !important;
+	margin: 0;
+}
+.wcb_organizer .wp-block-wordcamp-avatar a {
+	display: block;
+	height: 100%;
+}
+.wcb_organizer .wp-block-wordcamp-avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+/* Text panel — generous inner padding, vertically centered next to the photo */
+.wcb_organizer > .wp-block-columns > .wp-block-column:last-child {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: clamp(1.5rem, 3vw, 2.5rem);
+	padding-left: 0;               /* flush against the photo on desktop (row layout) */
+}
+
+/* Social row spacing under the bio */
+.wcb_organizer .wp-block-post-content .wp-block-social-links {
+	margin-top: 1rem;
+	gap: 0.5rem;                   /* small, even spacing between the icons (block ships with gap:0) */
+}
+
+/* Uniform brand-blue social icons — the design uses one colour for every network,
+   not WordPress' default per-brand colours (Instagram magenta, gray link, etc.).
+   NOTE: #1e2f97 is SAMPLED from the Figma design crop; swap for the exact token
+   once the Figma MCP quota is available. */
+.wcb_organizer .wp-block-social-links .wp-social-link {
+	background-color: #1e2f97 !important;
+}
+.wcb_organizer .wp-block-social-links .wp-social-link svg {
+	fill: #ffffff !important;
+}
+
+/* Stacked layout — photo on top, text below. Breakpoint matches WP core's own
+   column-stacking threshold (781px) so there's no flush-left gap in the 768–781 band. */
+@media (max-width: 781px) {
+	.wcb_organizer > .wp-block-columns {
+		flex-direction: column;
+	}
+	.wcb_organizer > .wp-block-columns > .wp-block-column:first-child {
+		flex-basis: auto;
+	}
+	.wcb_organizer .wp-block-wordcamp-avatar img {
+		/* !important beats the global `.wp-block-wordcamp-avatar img { max-height:100% !important }`
+		   rule above; without it the stacked photo grows to full width×width. */
+		max-height: 360px !important;
+		object-position: center top;   /* keep faces in frame when the wide photo is cropped */
+	}
+	/* restore left padding once the text sits below the photo
+	   (!important beats the block's inline padding-left:0) */
+	.wcb_organizer > .wp-block-columns > .wp-block-column:last-child {
+		padding-left: clamp(1.25rem, 5vw, 1.75rem) !important;
+	}
+}
