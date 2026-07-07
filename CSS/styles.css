@@ -1244,6 +1244,6 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 }
 
 /* Newsletter form */
-.wp-block-jetpack-subscriptions.wp-block-jetpack-subscriptions__supports-newline .wp-block-jetpack-subscriptions__form .wp-block-jetpack-subscriptions__button {
+.wp-block-jetpack-subscriptions .wp-block-button__link {
   margin-left: 0 !important;
 }
