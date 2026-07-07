@@ -1242,3 +1242,8 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 		padding-left: clamp(1.25rem, 5vw, 1.75rem) !important;
 	}
 }
+
+/* Newsletter form */
+.wp-block-jetpack-subscriptions.wp-block-jetpack-subscriptions__supports-newline .wp-block-jetpack-subscriptions__form .wp-block-jetpack-subscriptions__button {
+  margin-left: 0 !important;
+}
