@@ -1187,7 +1187,7 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 .wcb_organizer .wp-block-wordcamp-avatar {
 	width: 100% !important;
 	height: auto !important;
-	max-width: 300px;              /* keeps the photo sensible when the card stacks full-width */
+	max-width: 600px;              /* keeps the photo sensible when the card stacks full-width */
 	aspect-ratio: 1 / 1;           /* square; switch to 4 / 5 for a portrait crop */
 	margin: 0;
 }
@@ -1243,15 +1243,6 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 	color: #ffffff !important;
 }
 
-/* Organizers intro banner image was mis-resized in the editor (inline
-   width:3000px;height:195px;object-fit:cover) which stretched/cropped it. Cap at 600px
-   and restore natural aspect. NOTE: targets the specific image; the cleaner long-term fix
-   is to reset its size in the Site Editor. */
-img.wp-image-17436 {
-	max-width: 600px !important;
-	width: 100% !important;
-	height: auto !important;
-}
 
 /* Stacked layout — photo on top, text below. Breakpoint matches WP core's own
    column-stacking threshold (781px) so there's no flush-left gap in the 768–781 band. */
