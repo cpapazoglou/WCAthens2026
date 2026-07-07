@@ -1204,8 +1204,12 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 	padding-left: 0;               /* flush against the photo on desktop (row layout) */
 }
 
-/* Social row spacing under the bio */
-.wcb_organizer .wp-block-post-content .wp-block-social-links {
+/* Social row spacing under the bio — applies to the organizer card (archive/grid,
+   .wcb_organizer) AND the single organizer page (.single-wcb_organizer). Always
+   scoped via .wp-block-post-content so the global header/footer social blocks that
+   also live on these pages are never touched. */
+.wcb_organizer .wp-block-post-content .wp-block-social-links,
+.single-wcb_organizer .wp-block-post-content .wp-block-social-links {
 	margin-top: 1rem;
 	gap: 0.5rem;                   /* small, even spacing between the icons (block ships with gap:0) */
 }
@@ -1214,10 +1218,12 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
    not WordPress' default per-brand colours (Instagram magenta, gray link, etc.).
    NOTE: #1e2f97 is SAMPLED from the Figma design crop; swap for the exact token
    once the Figma MCP quota is available. */
-.wcb_organizer .wp-block-social-links .wp-social-link {
+.wcb_organizer .wp-block-post-content .wp-social-link,
+.single-wcb_organizer .wp-block-post-content .wp-social-link {
 	background-color: #1e2f97 !important;
 }
-.wcb_organizer .wp-block-social-links .wp-social-link svg {
+.wcb_organizer .wp-block-post-content .wp-social-link svg,
+.single-wcb_organizer .wp-block-post-content .wp-social-link svg {
 	fill: #ffffff !important;
 }
 
@@ -1241,4 +1247,23 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 	.wcb_organizer > .wp-block-columns > .wp-block-column:last-child {
 		padding-left: clamp(1.25rem, 5vw, 1.75rem) !important;
 	}
+}
+
+/*--- Skyline band (reusable full-width pattern) ---*/
+/* 2026/07 by Claude — the WordCamp skyline strip that sits under the header.
+   Add the class `skyline-band` to any FULL-WIDTH (alignfull) Group / Cover / Spacer
+   block, anywhere on the site: the blue fills the entire width and the SVG pattern
+   repeats horizontally. The tile is exactly ONE pattern period (993.25px) so repeat-x
+   is seamless on any screen width. Height scales with the viewport (195/1920 = 10.15%),
+   matching the design ratio, clamped so it stays sensible on phones and ultra-wide.
+   Asset: upload header-skyline-band-tile.svg to the media library and point the URL
+   below at its /files/ path (see note in ONBOARDING/commit message about SVG uploads). */
+.skyline-band {
+	width: 100%;
+	height: clamp(96px, 10.15vw, 195px);
+	background-color: #448EF6;                 /* fills the full width, even beyond the tiles */
+	background-image: url('/files/2026/07/header-skyline-band-tile.svg');
+	background-repeat: repeat-x;
+	background-position: center top;
+	background-size: auto 100%;                /* tile scales to the band height, then repeats */
 }
