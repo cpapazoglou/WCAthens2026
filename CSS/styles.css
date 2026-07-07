@@ -1318,6 +1318,13 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 	flex-wrap: wrap !important;
 	justify-content: center !important;
 }
+/* Section heading — left-aligned, bold, same blue as the cards, with clear space below
+   it so the title isn't cramped against the cards (per design). */
+.community-section .wp-block-heading {
+	color: #1e2f97 !important;
+	text-align: left;
+	margin-bottom: 2.5rem;
+}
 .community-grid > .wp-block-column {
 	/* !important beats WP core's `.wp-block-column { flex:1 1 0 }`. grow:0 + shrink:0 so
 	   the cards keep their size and WRAP into rows (they don't shrink to cram into one),
@@ -1334,9 +1341,10 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 	transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
 }
 /* the label link is stretched over the whole card → the entire box is clickable */
-.community-card a {
+.community-card a,
+.community-card a:hover {
 	color: #ffffff;
-	text-decoration: none;
+	text-decoration: none !important;   /* override the global `p a:hover` underline */
 }
 .community-card a::after {
 	content: "";
