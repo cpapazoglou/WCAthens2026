@@ -1172,16 +1172,23 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 	box-shadow: 0 4px 24px rgba(13, 38, 107, 0.08);
 }
 
-/* Photo column — design ratio 448/1399 ≈ 32% */
+/* Photo column */
 .wcb_organizer > .wp-block-columns > .wp-block-column:first-child {
-	flex: 0 0 32%;
+	flex: 0 1 25%;
 	align-self: stretch;
+	display: flex;                 /* center the fixed-ratio photo within the column */
+	align-items: center;
+	justify-content: flex-start;
 }
 
-/* Photo fills the column flush, no distortion (live currently uses object-fit:fill) */
+/* Uniform photo box — a fixed aspect ratio on EVERY card and EVERY viewport, so the
+   avatars no longer stretch to the (variable) card height. object-fit: cover keeps them
+   filled and consistent; object-position: center top keeps faces in frame. */
 .wcb_organizer .wp-block-wordcamp-avatar {
 	width: 100% !important;
-	height: 100% !important;
+	height: auto !important;
+	max-width: 300px;              /* keeps the photo sensible when the card stacks full-width */
+	aspect-ratio: 1 / 1;           /* square; switch to 4 / 5 for a portrait crop */
 	margin: 0;
 }
 .wcb_organizer .wp-block-wordcamp-avatar a {
@@ -1192,6 +1199,7 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	object-position: center top;
 	display: block;
 }
 
@@ -1236,12 +1244,6 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 	.wcb_organizer > .wp-block-columns > .wp-block-column:first-child {
 		flex-basis: auto;
 	}
-	.wcb_organizer .wp-block-wordcamp-avatar img {
-		/* !important beats the global `.wp-block-wordcamp-avatar img { max-height:100% !important }`
-		   rule above; without it the stacked photo grows to full width×width. */
-		max-height: 360px !important;
-		object-position: center top;   /* keep faces in frame when the wide photo is cropped */
-	}
 	/* restore left padding once the text sits below the photo
 	   (!important beats the block's inline padding-left:0) */
 	.wcb_organizer > .wp-block-columns > .wp-block-column:last-child {
@@ -1266,4 +1268,58 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 	background-repeat: repeat-x;
 	background-position: center top;
 	background-size: auto 100%;                /* tile scales to the band height, then repeats */
+}
+
+/*--- Footer social icons — responsive size ---*/
+/* 2026/07 by Claude — the footer "follow us" block uses the "huge" icon size, which is
+   oversized on phones/tablets. Shrink it below 781px. Targets the huge-size modifier only,
+   so it stays reusable and never affects the small organizer-card social icons. */
+@media (max-width: 781px) {
+	/* Scale via font-size ONLY: the glyph (1em) and its padding scale together, so the
+	   circle stays round and the icon stays centred. huge = 48px (→ ~72px circle);
+	   34px → ~51px circle — smaller than desktop but not tiny. */
+	.wp-block-social-links.has-huge-icon-size {
+		font-size: 34px !important;
+		gap: 12px !important;
+	}
+}
+
+/*--- Newsletter (Jetpack subscription form) ---*/
+/* 2026/07 by Claude — close the thin gap ("keno") between the email field and the
+   Subscribe button so they read as a single bar. The button ships with margin-left:1px
+   and both controls have a 2px border, so a sliver of the section background shows
+   between them; overlap the shared border instead of leaving the gap. */
+.wp-block-jetpack-subscriptions__form-elements .wp-block-button__link {
+	margin-left: -2px !important;
+}
+
+/*--- Community grid ("Η κοινότητα του WordCamp") ---*/
+/* 2026/07 by Claude — row of square cards linking to the community sections.
+   Reusable via the block classes (.community-grid / .community-card), no id/slug.
+   Icons are placeholders (emoji) until the real white line-icons are supplied. */
+.community-grid {
+	gap: clamp(1rem, 2vw, 1.5rem);
+}
+.community-card {
+	aspect-ratio: 1 / 1;           /* square cards, like the design */
+	align-items: center;
+	justify-content: center;
+	gap: 0.75rem;
+	text-align: center;
+}
+/* label font (icon paragraph keeps its large size) */
+.community-card p:not(.has-x-large-font-size) {
+	font-family: 'Krona One', sans-serif;
+	line-height: 1.3;
+}
+/* Mobile: 2 cards per row instead of a single tall stack */
+@media (max-width: 781px) {
+	.community-grid {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	.community-grid > .wp-block-column {
+		flex-basis: calc(50% - 0.75rem) !important;
+		flex-grow: 0;
+	}
 }
