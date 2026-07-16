@@ -1373,3 +1373,29 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 		flex-basis: calc((100% - 1.25rem) / 2) !important;
 	}
 }
+/*--- Early-bird sponsor top bar ---*/
+/* Add class `wca-topbar` to the sticky header Group block (Advanced → Additional CSS class). */
+.wca-topbar {
+	display: flex !important;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 8px 18px !important;
+}
+.wca-topbar p,
+.wca-topbar .wp-block-buttons {
+	margin: 0 !important;
+}
+/* CTA hover/focus: same as default state, just a slightly lighter blue bg */
+.wca-topbar .wp-block-button__link:hover,
+.wca-topbar .wp-block-button__link:focus {
+	background-color: #1c46c9 !important;
+	color: #fff !important;
+}
+@media (max-width: 600px) {
+	.wca-topbar {
+		flex-direction: column;
+		gap: 8px !important;
+	}
+}
