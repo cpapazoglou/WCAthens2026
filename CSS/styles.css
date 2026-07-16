@@ -1387,11 +1387,15 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 .wca-topbar .wp-block-buttons {
 	margin: 0 !important;
 }
-/* CTA hover/focus: same as default state, just a slightly lighter blue bg */
-.wca-topbar .wp-block-button__link:hover,
-.wca-topbar .wp-block-button__link:focus {
+/* CTA hover/focus: identical to the default state, just a slightly lighter blue bg.
+   High specificity + border/opacity resets to beat the theme's own button-hover
+   rules (which otherwise force blue text, a 4px border and a faded bg). */
+.wca-topbar .wp-block-buttons .wp-block-button .wp-block-button__link:hover,
+.wca-topbar .wp-block-buttons .wp-block-button .wp-block-button__link:focus {
 	background-color: #1c46c9 !important;
 	color: #fff !important;
+	border: none !important;
+	opacity: 1 !important;
 }
 @media (max-width: 600px) {
 	.wca-topbar {
