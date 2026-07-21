@@ -1416,5 +1416,5 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 	border-bottom: 2px solid #5091ff !important;
 }
 .wca-sponsor-pricing tbody tr:nth-child(2) td:first-child {
-	box-shadow: inset 4px 0 0 #F9B233 !important; /* brand-yellow left accent */
+	box-shadow: inset 4px 0 0 #0d266b !important; /* darkest brand blue left accent */
 }
