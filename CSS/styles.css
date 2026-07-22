@@ -1152,22 +1152,22 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 
 /* Per-package size + columns, driven by WP's auto level class on each <li>.
    width = (100% - (cols-1)*gap) / cols  → fixed cols-per-row, no stretch. */
-.wca-sponsors li.wcb_sponsor_level-global {
+.wca-sponsors li.wcb_sponsor_level-global,
+.wca-sponsors li.wcb_sponsor_level-gold {
 	--wca-logo-h: 200px;
 	width: calc((100% - 3rem) / 3);      /* 3 per row */
 }
 
-.wca-sponsors li.wcb_sponsor_level-gold {
-	--wca-logo-h: 170px;
-	width: calc((100% - 3rem) / 3);      /* 3 per row */
-}
-
 .wca-sponsors li.wcb_sponsor_level-premium {
-	--wca-logo-h: 150px;
+	--wca-logo-h: 170px;
 	width: calc((100% - 4.5rem) / 4);    /* 4 per row */
 }
 
-.wca-sponsors li.wcb_sponsor_level-business,
+.wca-sponsors li.wcb_sponsor_level-business {
+	--wca-logo-h: 150px;
+	width: calc((100% - 6rem) / 5);      /* 5 per row */
+}
+
 .wca-sponsors li.wcb_sponsor_level-media-sponsors {
 	--wca-logo-h: 120px;
 	width: calc((100% - 6rem) / 5);      /* 5 per row */
@@ -1214,14 +1214,9 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 	display: none;
 }
 
-/* keep the design colours — theme/global styles override these otherwise */
-.wca-sponsors h2 {
-	color: #4b192d;
-}
-
-.wca-sponsors h3 {
-	color: #0c0c0c;
-}
+/* Heading colours are intentionally NOT set here — the admin picks them per
+   heading in the editor (block colour settings). Forcing them in CSS hit the
+   wrong headings when the section is reused / heading levels change. */
 
 /* "Όλοι οι χορηγοί" — design: transparent, blue text, bottom rule only */
 .wca-sponsors .wp-block-button__link {
@@ -1284,6 +1279,14 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 	.wca-sponsors .wp-block-post-featured-image {
 		height: calc(var(--wca-logo-h, 120px) * .7);
 	}
+}
+
+/* Page background helper — add class `wca-bg-cream` to the <body> of any page
+   that should use the cream background (e.g. attendees). Reusable, no page-id.
+   If you can't set a body class in the editor, use the auto slug class instead,
+   e.g. body.page-slug-attendees { background-color: #faf8f2; } */
+body.wca-bg-cream {
+	background-color: #faf8f2;
 }
 
 /* 2025/11/18 Volunteers page fix by CL */
