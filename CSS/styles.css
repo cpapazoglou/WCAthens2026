@@ -1128,74 +1128,161 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 	object-fit: contain !important;
 }
 
-/* Home sponsors section (reusable) — style the native wordcamp/sponsors list
-   like the 2025 site: uniform logo cards, contain, responsive grid.
-   Add class `wca-sponsors` to the Group that wraps the title + Sponsors block.
-   Works flat or grouped-by-level (one Sponsors block per level). 2026-07 */
-.wca-sponsors .wordcamp-sponsors {
-	display: grid !important;
-	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
-	gap: 1.5rem !important;
-	margin: 0 !important;
-	padding: 0 !important;
-	list-style: none !important;
+/* Home sponsors section (reusable) — style a Query Loop of wcb_sponsor
+   (core/query + post-template + post-featured-image) like the 2025 site.
+   Add class `wca-sponsors` to the Group that wraps the title + Query blocks.
+   Per-package logo size AND columns are keyed off the level class WordPress
+   auto-adds to each sponsor <li> (wcb_sponsor_level-<slug>) — so NO extra
+   classes are needed, and a lone sponsor never blows up in size. Each Query
+   must be filtered to a single level for clean columns. 2026-07 */
+.wca-sponsors .wp-block-post-template {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
-.wca-sponsors .wordcamp-sponsors .wordcamp-post-list__post {
-	margin: 0 !important;
-	padding: 0 !important;
-	list-style: none !important;
+.wca-sponsors .wp-block-post-template > li {
+	flex: 0 0 auto;
+	margin: 0;
+	padding: 0;
 }
 
-/* logo cell — plain like 2025 (no card), just center + uniform height */
-.wca-sponsors .wordcamp-sponsors__logo,
-.wca-sponsors .wordcamp-sponsors__logo a {
+/* Per-package size + columns, driven by WP's auto level class on each <li>.
+   width = (100% - (cols-1)*gap) / cols  → fixed cols-per-row, no stretch. */
+.wca-sponsors li.wcb_sponsor_level-global {
+	--wca-logo-h: 200px;
+	width: calc((100% - 3rem) / 3);      /* 3 per row */
+}
+
+.wca-sponsors li.wcb_sponsor_level-gold {
+	--wca-logo-h: 170px;
+	width: calc((100% - 3rem) / 3);      /* 3 per row */
+}
+
+.wca-sponsors li.wcb_sponsor_level-premium {
+	--wca-logo-h: 150px;
+	width: calc((100% - 4.5rem) / 4);    /* 4 per row */
+}
+
+.wca-sponsors li.wcb_sponsor_level-business,
+.wca-sponsors li.wcb_sponsor_level-media-sponsors {
+	--wca-logo-h: 120px;
+	width: calc((100% - 6rem) / 5);      /* 5 per row */
+}
+
+/* logo cell — plain like 2025 (no card), centered; height per package above */
+.wca-sponsors .wp-block-post-featured-image {
+	margin: 0;
+	height: var(--wca-logo-h, 120px);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
-
-.wca-sponsors .wordcamp-sponsors__logo {
-	height: 120px;
-	padding: 1rem;
 	transition: opacity .2s ease, transform .2s ease;
 }
 
-.wca-sponsors .wordcamp-sponsors__logo a {
-	width: 100%;
-	height: 100%;
-}
-
-.wca-sponsors .wordcamp-sponsors__logo:hover {
+.wca-sponsors .wp-block-post-featured-image:hover {
 	transform: translateY(-3px);
 	opacity: .8;
 }
 
-/* logos never distort */
-.wca-sponsors .wordcamp-sponsors__logo img {
-	width: auto !important;
-	height: auto !important;
-	max-width: 100%;
-	max-height: 100%;
-	object-fit: contain !important;
+.wca-sponsors .wp-block-post-featured-image a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
 }
 
-/* per-level heading when grouping like 2025 (add class to each level heading) */
-.wca-sponsors .wca-sponsors__level {
+/* logo never distorts, never overflows the cell */
+.wca-sponsors .wp-block-post-featured-image img {
+	width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;
+	padding: 1rem;
+	/* !important: the block sets object-fit:cover inline, which would crop
+	   logos. Scoped to our .wca-sponsors img only. */
+	object-fit: contain !important;
+	aspect-ratio: auto;
+}
+
+/* logo-wall needs no pager; hide it if a Pagination block was left in */
+.wca-sponsors .wp-block-query-pagination {
+	display: none;
+}
+
+/* keep the design colours — theme/global styles override these otherwise */
+.wca-sponsors h2 {
 	color: #4b192d;
-	font-weight: 700;
-	margin: 2.5rem 0 1.25rem;
+}
+
+.wca-sponsors h3 {
+	color: #0c0c0c;
+}
+
+/* "Όλοι οι χορηγοί" — design: transparent, blue text, bottom rule only */
+.wca-sponsors .wp-block-button__link {
+	background-color: transparent;
+	color: #1333a6;
+	border: 0;
+	border-bottom: 4px solid #1333a6;
+	border-radius: 0;
+	transition: color .2s ease, border-color .2s ease, opacity .2s ease;
+}
+
+.wca-sponsors .wp-block-button__link:hover,
+.wca-sponsors .wp-block-button__link:focus {
+	color: #0e2578;
+	border-bottom-color: #0e2578;
+	opacity: .9;
+}
+
+.wca-sponsors .wp-block-button__link:focus-visible {
+	outline: 2px solid #1333a6;
+	outline-offset: 3px;
+}
+
+/* Two identical "all sponsors" buttons, never shown together:
+   - top button (inside the header group) → desktop only
+   - bottom button (a Buttons block placed as a DIRECT child of the section,
+     after the last tier) → tablet & down only.
+   Bottom button is hidden by default; the breakpoint swaps them. */
+.wca-sponsors > .wp-block-buttons {
+	display: none;
+	justify-content: center;
+}
+
+@media (max-width: 1024px) {
+	.wca-sponsors > .wp-block-group .wp-block-buttons {
+		display: none;
+	}
+
+	.wca-sponsors > .wp-block-buttons {
+		display: flex;
+	}
 }
 
 @media (max-width: 767px) {
-	.wca-sponsors .wordcamp-sponsors {
-		grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)) !important;
-		gap: 1rem !important;
+	.wca-sponsors .wp-block-post-template {
+		gap: 1rem;
 	}
 
-	.wca-sponsors .wordcamp-sponsors__logo {
-		height: 100px;
-		padding: .9rem;
+	.wca-sponsors li.wcb_sponsor_level-global,
+	.wca-sponsors li.wcb_sponsor_level-gold {
+		width: calc((100% - 1rem) / 2);      /* 2 per row */
+	}
+
+	.wca-sponsors li.wcb_sponsor_level-premium,
+	.wca-sponsors li.wcb_sponsor_level-business,
+	.wca-sponsors li.wcb_sponsor_level-media-sponsors {
+		width: calc((100% - 2rem) / 3);      /* 3 per row */
+	}
+
+	.wca-sponsors .wp-block-post-featured-image {
+		height: calc(var(--wca-logo-h, 120px) * .7);
 	}
 }
 
