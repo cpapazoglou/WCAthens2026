@@ -1,7 +1,6 @@
 /* @import "includes/base.css"; */
 
 /**** Aditional CSS ****/
-/* Gloria Liuni rules */
 /*-- link underline -- */
 
 p a,
@@ -73,118 +72,97 @@ h4.has-text-align-right.view-all-underline:hover, .session-single-details .taxon
 		font-size: 1.2rem;
 	}
 
-	/*-- responsive ticket table --*/
-	.tix_tickets_table table,
-  .tix_tickets_table thead, 
-  .tix_tickets_table tbody,
-  .tix_tickets_table th,
-  .tix_tickets_table td,
-  .tix_tickets_table tr {
+	/*--- CampTix — responsive (mobile ≤767px), WCAthens 2026 ---*/
+	/* Stack all ticket / summary / form tables into single-column rows. */
+	.tix-js .tix_tickets_table,
+	.tix-js .tix_tickets_table thead,
+	.tix-js .tix_tickets_table tbody,
+	.tix-js .tix_tickets_table th,
+	.tix-js .tix_tickets_table td,
+	.tix-js .tix_tickets_table tr {
 		display: block;
 	}
 
-	/* Hide table headers (but not display: none;, for accessibility) */
-	.tix_tickets_table thead tr {
+	/* Hide column headers off-screen (kept for screen readers, not display:none). */
+	.tix-js .tix_tickets_table thead tr {
 		position: absolute;
 		top: -9999px;
 		left: -9999px;
 	}
 
-	.tix_tickets_table td {
-		/* Behave  like a "row" */
-		border: 0px;
-		position: relative;
-		padding-left: 50%;
-	}
-
-	td:before {
-		/* Now like a table header */
-		position: absolute;
-
-		/* Top/left values mimic padding */
-		top: 6px;
-		left: 6px;
-		width: 45%;
-		padding-right: 10px;
-		white-space: nowrap;
-	}
-
-	.tix-tickets-list .tix-column-description {
-		padding: 0px !important;
-		border: 0px;
+	/* Purchase card: centered, comfortably padded stacked rows. */
+	.tix-js .tix_tickets_table.tix-tickets-list tbody th,
+	.tix-js .tix_tickets_table.tix-tickets-list tbody td {
 		text-align: center !important;
+		padding: 14px 20px !important;
 	}
 
-	.tix-js .tix_tickets_table tbody .tix-ticket-title {
-		font-weight: bold;
-		font-family: 'Krona One';
-		text-transform: capitalize;
+	/* Key/value forms (attendee / receipt / private / ticket) + invoice details:
+	   put the label on its own line above a full-width field. */
+	.tix-js .tix-left,
+	.tix-js .tix-right {
 		display: block;
-		width: auto;
-		background: #F9B233;
-		padding: 10px 20px;
-	}
-
-	/*-- responsive ticket form --*/
-	.tix-ticket-form td.tix-left,
-	.tix-private-form td.tix-left,
-	.tix-attendee-form td.tix-left,
-	.tix-receipt-form td.tix-left,
-	.tix-ticket-form td.tix-right,
-	.tix-private-form td.tix-right,
-	.tix-attendee-form td.tix-right,
-	.tix-receipt-form td.tix-right {
-		width:90% !important;
-	}
-
-	.tix-js .tix_tickets_table.tix-attendee-form .tix-right {
-		padding-top: 0.5em !important;
-	}
-
-
-	.tix-js .tix_tickets_table.tix-attendee-form .tix-left,
-	.tix-js .camptix-invoice-toggle-wrapper .camptix-invoice-details .tix-left {
+		width: 100% !important;
 		text-align: left !important;
+		padding: 4px 0 !important;
 	}
 
-	.tix-js .tix_tickets_table.tix-attendee-form .tix-right {
-		padding-left: 20px;
+	.tix-js .tix-left:after {
+		content: none; /* drop the trailing ':' once the label is on its own line */
 	}
 
-	.tix-ticket-form input[type="text"],
-	.tix-ticket-form input[type="email"],
-	.tix-ticket-form input[type="url"],
-	.tix-ticket-form textarea,
-	.tix-private-form input[type="text"],
-	.tix-private-form input[type="email"],
-	.tix-private-form input[type="url"],
-	.tix-private-form textarea,
-	.tix-attendee-form input[type="text"],
-	.tix-attendee-form input[type="email"],
-	.tix-attendee-form input[type="url"],
-	.tix-attendee-form textarea,
-	.tix-receipt-form input[type="text"],
-	.tix-receipt-form input[type="email"],
-	.tix-receipt-form input[type="url"],
-	.tix-receipt-form textarea {
+	.tix-js .tix_tickets_table input[type="text"],
+	.tix-js .tix_tickets_table input[type="email"],
+	.tix-js .tix_tickets_table input[type="url"],
+	.tix-js .tix_tickets_table textarea,
+	.tix-js .camptix-invoice-details input[type="text"],
+	.tix-js .camptix-invoice-details input[type="email"],
+	.tix-js .camptix-invoice-details input[type="url"] {
 		width: 100% !important;
 	}
 
-	.tix-order-summary .tix-column-description {
-		width: 80% !important;
+	.tix-js .tix_tickets_table.tix-attendee-form tr,
+	.tix-js .tix_tickets_table.tix-receipt-form tr,
+	.tix-js .tix_tickets_table.tix-private-form tr,
+	.tix-js .tix_tickets_table.tix-ticket-form tr {
+		padding-bottom: 24px !important;
 	}
 
-	.tix-js .tix_tickets_table.tix-attendee-form tbody td,
-	.tix_tickets_table.tix-attendee-form tbody th {
-		padding: 5px 0px !important;
+	/* CTA button spans the full row on mobile. */
+	.tix-js .tix_tickets_table.tix-tickets-list ~ p {
+		max-width: 100%;
+		text-align: center;
 	}
 
-	.tix-attendee-form tr {
-		padding-bottom: 40px !important;
+	.tix-js input[type='submit'] {
+		width: 100%;
 	}
 
-	.tix-left {
-		font-weight: 600 !important;
+	/* Summary table stacks into one column (labels are self-evident). */
+	.tix-js .tix-ticket-form thead {
+		display: none;
+	}
+
+	.tix-js .tix-ticket-form,
+	.tix-js .tix-ticket-form tbody,
+	.tix-js .tix-ticket-form tr,
+	.tix-js .tix-ticket-form td {
+		display: block;
+		width: 100%;
+	}
+
+	.tix-js .tix-ticket-form tbody td {
+		border-bottom: none;
+		padding: 4px 20px !important;
+	}
+
+	.tix-js .tix-ticket-form tbody td:first-child {
+		padding-top: 18px !important;
+	}
+
+	.tix-js .tix-ticket-form tbody tr {
+		border-bottom: 1px solid #f0f0f2;
+		padding-bottom: 12px;
 	}
 } /* End of media rule @media (max-width:767px) */
 
@@ -261,11 +239,6 @@ ul.organizers-index li a {
 }
 
 /*--- latest news home ---*/
-.latest-news-home {
-	background: url('https://i0.wp.com/europe.wordcamp.org/2024/files/2024/01/Yellow-Latest-News-Top.png') right top no-repeat, url('/files/2026/04/Yellow-Latest-News.png') left 45px bottom no-repeat;
-	background-size: 50%, 250px;
-}
-
 .latest-news-home-feed li {
 	display:grid;
 }
@@ -276,14 +249,12 @@ ul.organizers-index li a {
 }
 
 .latest-news-home-feed .wp-block-latest-posts__post-date {
-	font-family: 'Krona One';
 	color: var(--wp--preset--color--custom-mandy-dark);
 	font-size: 20px;
 	order: 2;
 }
 
 .latest-news-home-feed .wp-block-latest-posts__post-title {
-	font-family: 'Krona One';
 	color: black;
 	font-size: 30px;
 	order: 3;
@@ -294,7 +265,6 @@ ul.organizers-index li a {
 }
 
 .wp-block-latest-posts__post-excerpt a {
-	font-family: 'Krona One';
 	font-size: 18px;
 	background: var(--wp--preset--color--custom-trinidad-80);
 	padding: 15px 30px;
@@ -318,7 +288,6 @@ ul.organizers-index li a {
 }
 
 .upcomming-events-home-feed .wp-block-latest-posts__post-date {
-	font-family: 'Krona One';
 	color: var(--wp--preset--color--custom-mandy-dark);
 	font-size: 20px;
 	order: 2;
@@ -326,7 +295,6 @@ ul.organizers-index li a {
 }
 
 .upcomming-events-home-feed .wp-block-latest-posts__post-title {
-	font-family: 'Krona One';
 	color: black;
 	font-size: 30px;
 	order: 3;
@@ -340,89 +308,6 @@ ul.organizers-index li a {
 
 .wp-block-latest-posts__post-excerpt a {
 	display: none;
-}
-
-/*--- ORGANIZERS ---*/
-.organizers-index li {
-	font-family: 'Krona One';
-	margin-left: 1.5rem;
-}
-
-.page-id-957 .wordcamp-organizer {
-	display: grid;
-}
-
-.page-id-957 .wordcamp-block__item-title {
-	order: 2;
-	font-size: clamp(1.2rem, 0.7863rem + 1.7419vw, 1.875rem);
-}
-
-.wordcamp-organizer h3{
-	margin: 10px 0 !important;
-}
-
-.wordcamp-organizer p {
-	margin-block-start: 0em;
-}
-
-.page-id-957 .wordcamp-image__avatar-container {
-	order: 1;
-}
-
-.page-id-957 .wordcamp-block__item-content {
-	order: 3;
-	font-size: clamp(1.2rem, 0.9395rem + 1.0968vw, 1.625rem);
-}
-
-.page-id-957 .wordcamp-post-list.has-layout-grid {
-	grid-column-gap: 3em;
-}
-
-.page-id-957 .slug-juan-hernando .wordcamp-image__avatar-container::after,
-.page-id-957 .slug-takis-bouyouris .wordcamp-image__avatar-container::after,
-.page-id-957 .slug-wendie-huis-in-t-veld .wordcamp-image__avatar-container::after,
-.page-id-957 .wordcamp-post-list li:first-child .wordcamp-image__avatar-container::after {
-	content: "";
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 100px; /* Adjust with the over image */
-	background-image: url('/files/2026/04/Organizer-Border-Pink.png');
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-
-.page-id-1479 #tix-attendees li .avatar,
-.sponsor-human .wp-block-image,
-.page-id-957 .wordcamp-image__avatar-container {
-	position: relative;
-}
-
-.tix-attendee-list li img {
-	background-image: url('/files/2024/05/no-image-avatar-256.png');
-	background-size: cover;
-	background-position: center;
-}
-
-/* .page-id-1479 #tix-attendees li .avatar::after, */
-.sponsor-human .wp-block-image.size-full::after,
-.page-id-957 .wordcamp-image__avatar-container::after {
-	content: "";
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 100px; /* Adjust with the over image */
-	background-image: url('/files/2026/04/Organizer-Shape-Yellow.png');
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-
-.page-id-1479 #tix-attendees li .avatar img,
-.sponsor-human img,
-.page-id-957 .wordcamp-image__avatar-container img {
-	width: 100%;
 }
 
 /*--- footer ---*/
@@ -488,7 +373,6 @@ ul.organizers-index li a {
 		padding: 15px !important;
 		border: 2px solid #ea5b1b;
 		color: #ea5b1b !important;
-		font-family: 'Krona One';
 		text-transform: uppercase;
 		text-align: center;
 	}
@@ -498,43 +382,149 @@ ul.organizers-index li a {
 	}
 } /* End of media rule @media (max-width:767px) */
 
-/*--- responsive, ONLY for mobile ---*/
+/*===================================================================
+   CampTix / Tickets — clean, cohesive, WCAthens 2026 brand (by CL).
+   Rewritten 2026-07 to drop CSS inherited from another WordCamp.
+   Brand fonts, applied explicitly so nothing falls back to the
+   theme's Open Sans:
+                    (display / all-caps feel)
+     'Mulish'    -> small meta labels (field labels, "remaining")
+     'Lora'      -> body / descriptions / input values (the base)
+===================================================================*/
 
-/* Camptix block */
+/* Base: inherit the site's configured font (Global Styles). Do NOT set
+   font-family anywhere in the ticket CSS — let the theme decide. */
 .tix-js {
 	font-size: 1.1em;
 }
 
+/* Generic cell padding; the card table and the key/value forms below
+   set their own where they need it. */
 .tix-js .tix_tickets_table th,
 .tix-js .tix_tickets_table td {
 	padding: 5px 20px;
 }
 
-.tix-js .tix_tickets_table thead th {
-	background-color: #f9b233;
-	font-weight: bold;
-	color: #fff;
+/*--- Purchase table (.tix-tickets-list): full-width branded card ---*/
+.tix-js .tix_tickets_table.tix-tickets-list {
+	width: 100%;
+	border-collapse: separate !important; /* separate + overflow:hidden lets the corners round */
+	border-spacing: 0 !important;
+	border: none;
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 10px 30px rgba(19, 51, 166, 0.12);
+	margin: 0 0 2rem; /* no top gap — sits at the top of its section */
+	background: #fff;
 }
 
-.tix-js .tix_tickets_table tbody .tix-ticket-title {
-font-weight: bold;
+.tix-js .tix_tickets_table.tix-tickets-list thead th {
+	background-color: var(--wp--preset--color--custom-trinidad-100) !important; /* brand navy #1333A6, high contrast vs the old white-on-yellow */
+	color: #fff !important;
+	font-size: 0.72rem;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	font-weight: 700;
+	padding: 18px 20px !important;
+	border: none;
 }
 
-.tix-js .tix_tickets_table tbody th,
-.tix-js .tix_tickets_table tbody td {
-	border: 1px solid #ccc;
+.tix-js .tix_tickets_table.tix-tickets-list thead th.tix-column-price,
+.tix-js .tix_tickets_table.tix-tickets-list thead th.tix-column-remaining,
+.tix-js .tix_tickets_table.tix-tickets-list thead th.tix-column-quantity {
 	text-align: center;
 }
 
-.tix-js .tix_tickets_table tbody .tix-column-price,
-.tix-js .tix_tickets_table tbody .tix-column-remaining {
-	font-weight: bold;
+.tix-js .tix_tickets_table.tix-tickets-list tbody th,
+.tix-js .tix_tickets_table.tix-tickets-list tbody td {
+	border: none;
+	border-bottom: 1px solid #f0f0f2;
+	padding: 20px !important;
+	vertical-align: middle;
+	background: #fff;
+	text-align: center;
 }
 
-.tix-js .tix_tickets_table tbody .tix-column-quantity select {
-	padding: 8px 7px;
+.tix-js .tix_tickets_table.tix-tickets-list tbody tr:last-child th,
+.tix-js .tix_tickets_table.tix-tickets-list tbody tr:last-child td {
+	border-bottom: none;
 }
 
+.tix-js .tix_tickets_table.tix-tickets-list tbody .tix-column-description {
+	text-align: left;
+}
+
+.tix-js .tix_tickets_table.tix-tickets-list tbody .tix-ticket-title {
+	font-weight: 700;
+	font-size: 1.05rem;
+	color: var(--wp--preset--color--custom-trinidad-100); /* navy */
+	text-transform: none;
+	background: none;
+	padding: 0;
+	display: block;
+}
+
+.tix-js .tix_tickets_table.tix-tickets-list tbody .tix-column-price {
+	font-weight: 700;
+	font-size: 1.15rem;
+}
+
+.tix-js .tix_tickets_table.tix-tickets-list tbody .tix-column-remaining {
+	font-weight: 700;
+	color: #6b7280;
+}
+
+.tix-js .tix_tickets_table.tix-tickets-list tbody .tix-column-quantity select {
+	font-size: 0.9rem;
+	color: var(--wp--preset--color--custom-trinidad-100);
+	padding: 10px 14px !important;
+	border: 2px solid var(--wp--preset--color--custom-trinidad-100);
+	border-radius: 10px;
+	background: #fff;
+	cursor: pointer;
+	min-width: 72px;
+	transition: border-color 0.15s ease;
+}
+
+.tix-js .tix_tickets_table.tix-tickets-list tbody .tix-column-quantity select:hover,
+.tix-js .tix_tickets_table.tix-tickets-list tbody .tix-column-quantity select:focus {
+	border-color: var(--wp--preset--color--custom-mandy-dark);
+	outline: none;
+}
+
+/* The Register button's <p> wrapper is float:right (theme) → it drifts far from the
+   table. Anchor it under the 640px table, aligned to the table's right edge. */
+.tix-js .tix_tickets_table.tix-tickets-list ~ p {
+	float: none !important;
+	text-align: right;
+	margin: 0;
+}
+
+/*--- Forms & order summary: fonts (labels Mulish, values Lora) ---*/
+/* Field/summary labels: small-caps meta feel in Mulish. Covers the
+   attendee, receipt, private and ticket forms + the invoice details. */
+.tix-js .tix-left {
+	font-weight: 700;
+	color: #1f2a44;
+}
+
+/* Values stay in Lora (inherited from .tix-js base) — nothing to set. */
+
+.tix-js .tix_tickets_table.tix-order-summary .tix-row-total th,
+.tix-js .tix_tickets_table.tix-order-summary .tix-row-total td {
+	font-weight: 700;
+	font-size: 0.95rem;
+	color: var(--wp--preset--color--custom-trinidad-100); /* navy #1333A6 */
+}
+
+/* Coupon field (only rendered when coupons are enabled) — keep it on-brand. */
+.tix-js .tix-coupon,
+.tix-js #tix-coupon-container,
+.tix-js .tix-coupon-container {
+	margin: 1rem 0 1.5rem;
+}
+
+/*--- Order summary layout ---*/
 .tix-js .tix_tickets_table.tix-order-summary {
 	width: 100%;
 	margin-top: 2rem;
@@ -636,23 +626,28 @@ font-weight: bold;
 	margin-bottom: 3em;
 }
 
+/* Register / checkout — our standard site button: navy pill, white text
+   (matches .wp-block-button__link). No yellow, no font-family. */
 .tix-js input[type='submit'],
 .tix-checkout-button {
-	font-family: 'Krona One';
+	font-size: 0.9rem;
+	letter-spacing: 0.5px;
 	margin-top: 2rem;
-	border: 2px solid #F9B233 !important;
-	padding: 15px 30px !important;
-	background-color: #F9B233;
-	color: #000;
+	padding: 14px 34px !important;
+	background-color: var(--wp--preset--color--custom-trinidad-100);
+	border: 2px solid var(--wp--preset--color--custom-trinidad-100) !important;
+	color: #fff;
 	text-transform: uppercase;
+	border-radius: 999px;
 	cursor: pointer;
+	transition: all 0.15s ease;
 }
 
 .tix-js input[type='submit']:hover,
 .tix-checkout-button:hover {
-	border: 2px solid #F9B233 !important;
 	background-color: #fff;
-	color: #000;
+	color: var(--wp--preset--color--custom-trinidad-100);
+	border: 2px solid var(--wp--preset--color--custom-trinidad-100) !important;
 }
 
 .tix-js #tix-registration-information {
@@ -661,16 +656,58 @@ font-weight: bold;
 }
 
 .tix-js .tix-payment-method .tix-payment-tab {
-	border-color: #f9b233;
+	border-color: var(--wp--preset--color--custom-trinidad-100);
 }
 
 .tix-js .tix-payment-method-container fieldset {
-	border: 1px solid #f9b233;
+	border: 1px solid var(--wp--preset--color--custom-trinidad-100);
 }
 
-table.tix_tickets_table.tix-tickets-list {
-	border-collapse: collapse;
+/*--- "Your tickets" summary (.tix-ticket-form — thank-you / access page) ---*/
+/* Same branded card as the purchase table. Inherits site fonts. */
+.tix-js .tix-ticket-form {
+	width: 100%;
+	border-collapse: separate !important; /* + overflow:hidden → rounded corners */
+	border-spacing: 0 !important;
+	border: none;
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 10px 30px rgba(19, 51, 166, 0.12);
+	margin: 0 0 2rem;
+	background: #fff;
 }
+
+.tix-js .tix-ticket-form thead th {
+	background-color: var(--wp--preset--color--custom-trinidad-100) !important; /* navy #1333A6 */
+	color: #fff !important;
+	text-align: left;
+	font-size: 0.72rem;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	font-weight: 700;
+	padding: 16px 20px !important;
+	border: none;
+}
+
+.tix-js .tix-ticket-form tbody td {
+	border: none;
+	border-bottom: 1px solid #f0f0f2;
+	padding: 18px 20px !important;
+	vertical-align: top;
+	background: #fff;
+}
+
+.tix-js .tix-ticket-form tbody tr:last-child td {
+	border-bottom: none;
+}
+
+.tix-js .tix-ticket-form tbody td strong {
+	color: var(--wp--preset--color--custom-trinidad-100); /* attendee name in brand navy */
+	font-size: 1.05rem;
+}
+
+/* (removed the inherited `border-collapse: collapse` on .tix-tickets-list —
+   it fought the card's separate/rounded corners above.) */
 
 .entry-content input,
 .entry-content select {
@@ -680,7 +717,6 @@ table.tix_tickets_table.tix-tickets-list {
 }
 
 .package-avl-table a {
-	font-family:'Krona One';
 	font-size: 32px;
 	text-decoration:none;
 }
@@ -715,7 +751,6 @@ table.tix_tickets_table.tix-tickets-list {
 }
 
 .web-log-2024 .wp-block-post-excerpt__more-link {
-	font-family: 'Krona One', sans-serif;
 	background-color: #F9B233 !important;
 	border: 3px solid #F9B233 !important;
 	font-size: 18px;
@@ -737,92 +772,6 @@ table.tix_tickets_table.tix-tickets-list {
 .mini-community-spotlight .wp-block-read-more:hover {
 	background-color: #ffffff !important;
 	border: 3px solid #F9B233 !important;
-}
-
-/** Attendees Page **/
-.page-id-1479 #tix-attendees li {
-	height: auto;
-	min-height: 350px;
-	overflow: hidden;
-	text-align: center;
-}
-
-.page-id-1479 #tix-attendees li .avatar {
-	float: none;
-	height: auto;
-	width: 96px !important;
-}
-
-.page-id-1479 #tix-attendees li .tix-attendee-name {
-	color: var(--wp--preset--color--contrast);
-	font-family: 'Krona One', sans-serif;
-	text-transform: capitalize;
-	font-size: clamp(1.1rem, 0.7863rem + 1.7419vw, 1.5rem);
-	text-align: center;
-}
-
-.page-id-1479 #tix-attendees .tix-attendee-twitter {
-	float: left;
-	margin-top: 10px;
-	visibility: hidden;
-	width: 33%;
-	margin-right: 0px;
-	margin-left: 0px;
-	font-size: 0px;
-}
-
-.page-id-1479 #tix-attendees .tix-attendee-url {
-	float: left;
-	margin-top: 10px;
-	visibility: hidden;
-	width: 33%;
-	margin-right: 0px;
-	margin-left: 0px;
-	font-size: 0px;
-}
-
-.page-id-1479 #tix-attendees .tix-attendee-twitter:before {
-	background: url(//europe.wordcamp.org/2024/files/2024/02/Vector.png) no-repeat center center;
-	background-size: contain;
-	content: "";
-	display: inline-block;
-	height: 24px;
-	visibility: visible;
-	width: 24px;
-}
-
-.page-id-1479 #tix-attendees .tix-attendee-url:before {
-	background: url(//europe.wordcamp.org/2024/files/2024/02/website.png) no-repeat center center;
-	background-size: contain;
-	content: "";
-	display: inline-block;
-	height: 24px;
-	visibility: visible;
-	width: 24px;
-}
-
-.page-id-1479 #tix-attendees a[href^="https://profiles.wordpress.org"]:before {
-	background: url(//europe.wordcamp.org/2024/files/2024/02/wordpress.png) no-repeat center center;
-	background-size: contain;
-}
-
-.page-id-1479 #tix-attendees li .tix-attendee-name {
-	margin-left: 0px !important;
-}
-
-.page-id-1479 .tix-last {
-	display: block;
-	clear: both;
-}
-
-.page-id-1479 #tix-attendees .tix-columns-4 {
-	display: grid;
-	gap: 40px;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-
-.page-id-1479 #tix-attendees .tix-columns-4 li {
-	width: 100%;
 }
 
 /* Attendee list avatar */
@@ -864,7 +813,6 @@ table.tix_tickets_table.tix-tickets-list {
 
 .wordcamp-schedule .wordcamp-schedule__column-header {
 	background-color: #FBD185 !important;
-	font: 20px/32px 'Krona One', sans-serif;
 	padding: 20px !important;
 }
 @media ( min-height: 1000px ) {
@@ -880,7 +828,6 @@ table.tix_tickets_table.tix-tickets-list {
 }
 
 .wordcamp-schedule__date {
-	font: 36px/40px 'Krona One', sans-serif;
 }
 
 .wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__day {
@@ -921,7 +868,6 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 }
 
 .speaker-single-session p a {
-	font: 24px/40px 'Krona One';
 	text-decoration: none;
 }
 
@@ -1024,31 +970,26 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 
 .session-single-details .wp-block-wordcamp-session-speakers__name a,
 .session-single-details .taxonomy-wcb_session_category a {
-	font: 32px 'Krona One';
 	text-decoration: none;
 }
 
 .session-single-details .wp-block-wordcamp-session-date,
 .session-single-details .taxonomy-wcb_track a {
-	font: 18px 'Krona One';
 	text-decoration: none;
 }
 
 .session-single-details .wp-block-wordcamp-session-speakers__name a,
 .session-single-details .taxonomy-wcb_session_category a {
-	font: 32px 'Krona One';
 	text-decoration: none;
 }
 
 .session-single-details .wp-block-wordcamp-session-date,
 .session-single-details .taxonomy-wcb_track a {
-	font: 18px 'Krona One';
 	text-decoration: none;
 }
 
 .session-single-details .session-slides-link a,
 .session-single-details .session-video-link a {
-	font: 18px 'Krona One';
 	text-decoration: none;
 }
 
@@ -1154,33 +1095,47 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
    width = (100% - (cols-1)*gap) / cols  → fixed cols-per-row, no stretch. */
 .wca-sponsors li.wcb_sponsor_level-global,
 .wca-sponsors li.wcb_sponsor_level-gold {
-	--wca-logo-h: 200px;
 	width: calc((100% - 3rem) / 3);      /* 3 per row */
 }
 
 .wca-sponsors li.wcb_sponsor_level-premium {
-	--wca-logo-h: 170px;
 	width: calc((100% - 4.5rem) / 4);    /* 4 per row */
 }
 
-.wca-sponsors li.wcb_sponsor_level-business {
-	--wca-logo-h: 150px;
-	width: calc((100% - 6rem) / 5);      /* 5 per row */
-}
-
+.wca-sponsors li.wcb_sponsor_level-business,
 .wca-sponsors li.wcb_sponsor_level-media-sponsors {
-	--wca-logo-h: 120px;
 	width: calc((100% - 6rem) / 5);      /* 5 per row */
 }
 
-/* logo cell — plain like 2025 (no card), centered; height per package above */
+/* logo cell — plain like 2025 (no card), centered; 120px default, per-package
+   height set below. NB: heights are plain px (not CSS custom properties) — the
+   WordCamp CSS sanitizer strips `--custom-prop:` declarations, so a var()
+   approach silently fell back to the default. */
 .wca-sponsors .wp-block-post-featured-image {
 	margin: 0;
-	height: var(--wca-logo-h, 120px);
+	height: 120px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	transition: opacity .2s ease, transform .2s ease;
+}
+
+/* per-package logo height (keyed off WP's auto level class on each <li>) */
+.wca-sponsors li.wcb_sponsor_level-global .wp-block-post-featured-image,
+.wca-sponsors li.wcb_sponsor_level-gold .wp-block-post-featured-image {
+	height: 200px;
+}
+
+.wca-sponsors li.wcb_sponsor_level-premium .wp-block-post-featured-image {
+	height: 170px;
+}
+
+.wca-sponsors li.wcb_sponsor_level-business .wp-block-post-featured-image {
+	height: 150px;
+}
+
+.wca-sponsors li.wcb_sponsor_level-media-sponsors .wp-block-post-featured-image {
+	height: 120px;
 }
 
 .wca-sponsors .wp-block-post-featured-image:hover {
@@ -1276,8 +1231,21 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 		width: calc((100% - 2rem) / 3);      /* 3 per row */
 	}
 
-	.wca-sponsors .wp-block-post-featured-image {
-		height: calc(var(--wca-logo-h, 120px) * .7);
+	.wca-sponsors li.wcb_sponsor_level-global .wp-block-post-featured-image,
+	.wca-sponsors li.wcb_sponsor_level-gold .wp-block-post-featured-image {
+		height: 140px;
+	}
+
+	.wca-sponsors li.wcb_sponsor_level-premium .wp-block-post-featured-image {
+		height: 120px;
+	}
+
+	.wca-sponsors li.wcb_sponsor_level-business .wp-block-post-featured-image {
+		height: 105px;
+	}
+
+	.wca-sponsors li.wcb_sponsor_level-media-sponsors .wp-block-post-featured-image {
+		height: 80px;
 	}
 }
 
@@ -1287,6 +1255,67 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
    e.g. body.page-slug-attendees { background-color: #faf8f2; } */
 body.wca-bg-cream {
 	background-color: #faf8f2;
+}
+
+/*--- Attendees list (.tix-attendee-list) — round avatars + names, per Figma
+   (node 385-2217). Component-scoped so it works on any attendees list; the
+   volunteers page keeps its own smaller avatar (more specific legacy rule).
+   No font-family — the name inherits the site's configured font. 2026-07 */
+.tix-attendee-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	gap: 3.5rem 1.5rem;
+}
+
+.tix-attendee-list li {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	text-align: center;
+	margin: 0;
+}
+
+/* round avatar, 120px (design) */
+.tix-attendee-list li img.avatar {
+	width: 120px !important;
+	height: 120px !important;
+	max-width: 120px;
+	border-radius: 50%;
+	object-fit: cover;
+	aspect-ratio: 1 / 1;
+}
+
+/* name: bold, 26px, brand almost-black, tracked (design). The theme sizes the
+   inner spans with an #id + !important rule, so we must match with #tix-attendees
+   and !important to win. */
+#tix-attendees .tix-attendee-name,
+#tix-attendees .tix-attendee-name .tix-first,
+#tix-attendees .tix-attendee-name .tix-last {
+	font-weight: 800 !important;
+	font-size: 1.625rem !important;
+	letter-spacing: 1px !important;
+	line-height: 1.2;
+	color: #2b2b2b !important;
+}
+
+@media (max-width: 767px) {
+	.tix-attendee-list {
+		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+		gap: 2rem 1rem;
+	}
+
+	.tix-attendee-list li img.avatar {
+		width: 90px !important;
+		height: 90px !important;
+	}
+
+	#tix-attendees .tix-attendee-name,
+	#tix-attendees .tix-attendee-name .tix-first,
+	#tix-attendees .tix-attendee-name .tix-last {
+		font-size: 1.25rem !important;
+	}
 }
 
 /* 2025/11/18 Volunteers page fix by CL */
@@ -1519,7 +1548,6 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 }
 /* label font (icon paragraph keeps its large size) */
 .community-card p:not(.has-x-large-font-size) {
-	font-family: 'Krona One', sans-serif;
 	line-height: 1.3;
 }
 /* tablet: 3 per row → 5 wraps to 3 + 2 (last row centred) */

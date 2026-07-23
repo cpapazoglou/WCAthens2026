@@ -1,0 +1,12 @@
+{
+  "name": "wca-css-proxy",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node proxy.js",
+    "css": "node serve-css.js"
+  },
+  "dependencies": {
+    "http-proxy-middleware": "^3.0.3"
+  }
+}
