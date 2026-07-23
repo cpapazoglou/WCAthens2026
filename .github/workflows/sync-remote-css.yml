@@ -1,0 +1,21 @@
+name: Sync Remote CSS
+
+# Auto-deploy: whenever CSS/styles.css lands on main, ping WordCamp.org's
+# Remote CSS webhook so the live site re-pulls (equivalent to pressing
+# "Update" in Appearance → CSS). See CLAUDE.md.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'CSS/styles.css'
+  workflow_dispatch: {} # allow a manual run from the Actions tab
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Remote CSS sync
+        run: |
+          curl -fsS --retry 3 --retry-delay 5 \
+            "https://athens.wordcamp.org/2026/wp-admin/admin-ajax.php?action=wcrcss_webhook"
