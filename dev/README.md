@@ -37,7 +37,12 @@ Then open the live path through the proxy, e.g.:
 
 Your local `CSS/styles.css` is injected **last in `<head>`**, so it overrides
 the live/synced remote CSS at equal specificity. Links stay inside the proxy so
-you can click around. Edit the CSS → refresh → done.
+you can click around.
+
+**Live reload:** the proxy polls the file (~1s) and **hot-swaps the styles the
+moment you save** — no manual refresh, no full reload (scroll position kept). Just
+edit `CSS/styles.css` and watch. (It swaps only the `<style>`; if you also change
+markup/blocks, refresh the page.)
 
 **Limit:** public pages only. The browser won't send your `wordcamp.org` login
 cookie to `localhost`, so logged-in and `?preview=true` pages won't load fully —

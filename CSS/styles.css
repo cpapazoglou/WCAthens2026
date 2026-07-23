@@ -72,6 +72,7 @@ h4.has-text-align-right.view-all-underline:hover, .session-single-details .taxon
 		font-size: 1.2rem;
 	}
 
+	/* ==================== START OF CAMPTIX / TICKETS (MOBILE) ==================== */
 	/*--- CampTix — responsive (mobile ≤767px), WCAthens 2026 ---*/
 	/* Stack all ticket / summary / form tables into single-column rows. */
 	.tix-js .tix_tickets_table,
@@ -164,6 +165,7 @@ h4.has-text-align-right.view-all-underline:hover, .session-single-details .taxon
 		border-bottom: 1px solid #f0f0f2;
 		padding-bottom: 12px;
 	}
+	/* ==================== END OF CAMPTIX / TICKETS (MOBILE) ==================== */
 } /* End of media rule @media (max-width:767px) */
 
 /*-- Global buttons --*/
@@ -382,6 +384,7 @@ ul.organizers-index li a {
 	}
 } /* End of media rule @media (max-width:767px) */
 
+/* ======================== START OF CAMPTIX / TICKETS ======================== */
 /*===================================================================
    CampTix / Tickets — clean, cohesive, WCAthens 2026 brand (by CL).
    Rewritten 2026-07 to drop CSS inherited from another WordCamp.
@@ -708,6 +711,7 @@ ul.organizers-index li a {
 
 /* (removed the inherited `border-collapse: collapse` on .tix-tickets-list —
    it fought the card's separate/rounded corners above.) */
+/* ======================== END OF CAMPTIX / TICKETS ======================== */
 
 .entry-content input,
 .entry-content select {
@@ -1069,6 +1073,7 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 	object-fit: contain !important;
 }
 
+/* ======================== START OF HOME SPONSORS SECTION ======================== */
 /* Home sponsors section (reusable) — style a Query Loop of wcb_sponsor
    (core/query + post-template + post-featured-image) like the 2025 site.
    Add class `wca-sponsors` to the Group that wraps the title + Query blocks.
@@ -1248,7 +1253,9 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 		height: 80px;
 	}
 }
+/* ======================== END OF HOME SPONSORS SECTION ======================== */
 
+/* ======================== START OF PAGE BACKGROUND HELPER ======================== */
 /* Page background helper — add class `wca-bg-cream` to the <body> of any page
    that should use the cream background (e.g. attendees). Reusable, no page-id.
    If you can't set a body class in the editor, use the auto slug class instead,
@@ -1256,7 +1263,9 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 body.wca-bg-cream {
 	background-color: #faf8f2;
 }
+/* ======================== END OF PAGE BACKGROUND HELPER ======================== */
 
+/* ======================== START OF ATTENDEE LIST ======================== */
 /*--- Attendees list (.tix-attendee-list) — round avatars + names, per Figma
    (node 385-2217). Component-scoped so it works on any attendees list; the
    volunteers page keeps its own smaller avatar (more specific legacy rule).
@@ -1265,16 +1274,32 @@ body.wca-bg-cream {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
 	gap: 3.5rem 1.5rem;
+	justify-items: center;
 }
 
-.tix-attendee-list li {
+/* id-scoped + !important: the theme sets li float:left + a narrow width that
+   squeeze the name onto 2 lines; we must beat it to fill the grid cell. */
+#tix-attendees .tix-attendee-list li {
+	height: auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 1rem;
+	gap: 25px; /* design: 25px between avatar / name */
 	text-align: center;
-	margin: 0;
+	width: 100% !important;   /* fill the grid cell so the name has room + centers */
+	float: none !important;   /* kill the theme's float:left (overlap culprit) */
+	margin: 0 !important;     /* spacing comes from the grid gap, not li margins */
+}
+
+/* name on a single line (first + last side by side; wraps only if very long) */
+#tix-attendees .tix-attendee-name {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0 0.35em;
 }
 
 /* round avatar, 120px (design) */
@@ -1298,6 +1323,7 @@ body.wca-bg-cream {
 	letter-spacing: 1px !important;
 	line-height: 1.2;
 	color: #2b2b2b !important;
+	margin-left: 0;
 }
 
 @media (max-width: 767px) {
@@ -1317,6 +1343,7 @@ body.wca-bg-cream {
 		font-size: 1.25rem !important;
 	}
 }
+/* ======================== END OF ATTENDEE LIST ======================== */
 
 /* 2025/11/18 Volunteers page fix by CL */
 .page-slug-volunteers .tix-attendee-list li {
