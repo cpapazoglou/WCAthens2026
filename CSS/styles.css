@@ -1276,10 +1276,13 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 	transition: color .2s ease, border-color .2s ease;
 }
 
+/* !important: the block writes color + border-bottom-color inline, which beat a plain :hover */
 .wca-news .wp-block-button__link:hover,
 .wca-news .wp-block-button__link:focus {
-	color: #0e2578;
-	border-bottom-color: #0e2578;
+	color: #0e2578 !important;
+	border-bottom-color: #0e2578 !important;
+	background-color: transparent !important;
+	opacity: .9;                   /* same as the sponsors button */
 }
 
 .wca-news .wp-block-post-template {
