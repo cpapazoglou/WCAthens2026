@@ -1255,6 +1255,134 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 }
 /* ======================== END OF HOME SPONSORS SECTION ======================== */
 
+/* ======================== START OF HOME LATEST NEWS ======================== */
+/* Home "Latest news" (reusable) — style a Query Loop of the last 3 posts as
+   white cards. Add class `wca-news` to the Group that wraps title + Query.
+   Section bg / heading / "all news" button are set in the block editor; this
+   only does the card polish. EL/EN = two Queries (cat Greek Posts / English
+   Posts) in .lang-el / .lang-en groups. Markup: patterns/wca-latest-news.html. 2026-10 */
+.wca-news .wp-block-query {
+	margin-top: 2.5rem;
+}
+
+.wca-news .wp-block-post-template {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1.25rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.wca-news .wp-block-post-template > li {
+	position: relative;            /* anchor for the whole-card link */
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0 0 1.5rem;
+	background-color: #ffffff;
+	transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.wca-news .wp-block-post-template > li:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 12px 28px rgba(13, 38, 107, 0.30);
+}
+
+.wca-news .wp-block-post-featured-image {
+	margin: 0 0 1.5rem !important;
+	padding: 0 !important;
+}
+
+.wca-news .wp-block-post-featured-image img {
+	width: 100%;
+	aspect-ratio: 1200 / 630 !important;
+	object-fit: cover;
+	display: block;
+}
+
+/* no featured image → the block outputs nothing; keep the row aligned with a
+   same-size placeholder (WP adds .has-post-thumbnail only when there is one) */
+.wca-news .wp-block-post-template > li:not(.has-post-thumbnail)::before {
+	content: "";
+	display: block;
+	aspect-ratio: 1200 / 630;
+	margin-bottom: 1.5rem;
+	background-color: #b9d3f9;
+}
+
+.wca-news .wp-block-post-template > li > :not(.wp-block-post-featured-image) {
+	margin-left: 1.5rem;
+	margin-right: 1.5rem;
+}
+
+.wca-news .wp-block-post-date {
+	font-size: 14px;
+	color: #333333;
+	margin-top: 0;
+}
+
+.wca-news .wp-block-post-title {
+	font-size: 20px !important;
+	font-weight: 700;
+	line-height: 1.3;
+	margin: 0.75rem 0 0.5rem;
+}
+
+/* excerpt fills the card so "more" links line up at the bottom */
+.wca-news .wp-block-post-excerpt {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	margin-top: 0;
+	font-size: 15px;
+	line-height: 1.55;
+	color: #222222;
+}
+
+.wca-news .wp-block-post-excerpt__more-text {
+	margin-top: auto !important;
+	padding-top: 1rem;
+}
+
+.wca-news .wp-block-post-excerpt__more-link {
+	display: inline-block;
+	padding: 0 0.25rem 0.35rem;
+	border-bottom: 2px solid #5091ff;
+	color: #5091ff;
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	text-decoration: none !important;
+}
+
+/* the "more" link is the card's only URL, stretched over the whole card
+   (same trick as .community-card a::after) → the entire card is clickable */
+.wca-news .wp-block-post-excerpt__more-link::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+}
+
+.wca-news li:hover .wp-block-post-excerpt__more-link {
+	color: #1333a6;
+	border-bottom-color: #1333a6;
+}
+
+@media (max-width: 1023px) {
+	.wca-news .wp-block-post-template > li > :not(.wp-block-post-featured-image) {
+		margin-left: 1rem;
+		margin-right: 1rem;
+	}
+}
+
+@media (max-width: 767px) {
+	.wca-news .wp-block-post-template {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+/* ======================== END OF HOME LATEST NEWS ======================== */
+
 /* ======================== START OF PAGE BACKGROUND HELPER ======================== */
 /* Page background helper — add class `wca-bg-cream` to the <body> of any page
    that should use the cream background (e.g. attendees). Reusable, no page-id.
@@ -1490,10 +1618,26 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 	width: 100%;
 	height: clamp(96px, 10.15vw, 195px);
 	background-color: #448EF6;                 /* fills the full width, even beyond the tiles */
-	background-image: url('/files/2026/07/header-skyline-band-tile.svg');
+	background-image: url('/files/2026/05/Building-Ribbon.png'); /* Building-Ribbon.png from the media library */
 	background-repeat: repeat-x;
 	background-position: center top;
 	background-size: auto 100%;                /* tile scales to the band height, then repeats */
+}
+
+/* Image block variant: the block forces an <img>, which would sit on top of
+   the band — hide it so only the repeating background shows. Set the block to Full width. */
+.wp-block-image.skyline-band {
+	width: auto;                               /* let alignfull's negative margins span the viewport */
+	max-width: none;
+	margin-block: 0 !important;                /* 2026-10: flush with the sections above/below (no block-gap strip) */
+}
+
+.skyline-band + * {
+	margin-block-start: 0 !important;
+}
+
+.wp-block-image.skyline-band img {
+	display: none;
 }
 
 /*--- Footer social icons — responsive size ---*/
@@ -1527,7 +1671,8 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
    Icons are placeholders (emoji) until the real white line-icons are supplied. */
 .community-grid {
 	display: flex;
-	gap: 1.25rem;                  /* fixed gap so the per-row basis maths is exact */
+	gap: 60px;                     /* Figma 2026-10 */
+	max-width: none !important;    /* 2026-10: the card row breaks out of the content container (title stays in it) */
 }
 /* Higher specificity than WP core's `.wp-block-columns.is-not-stacked-on-mobile
    { flex-wrap: nowrap !important }`, so the cards actually wrap into rows. */
@@ -1538,24 +1683,40 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 /* Section heading — left-aligned, bold, same blue as the cards, with clear space below
    it so the title isn't cramped against the cards (per design). */
 .community-section .wp-block-heading {
-	color: #1e2f97 !important;
+	color: #0d266b !important;     /* 2026-10: navy title per Figma (darker than the cards) */
 	text-align: left;
-	margin-bottom: 2.5rem;
+	margin-top: 0;
+	margin-bottom: 100px;          /* Figma 2026-10 */
+}
+/* Figma 2026-10: 100px above the title and below the cards (overrides the block's own padding) */
+.community-section {
+	padding-top: 100px !important;
+	padding-bottom: 100px !important;
+}
+.community-section .community-grid {
+	margin-top: 0 !important;      /* no extra block gap on top of the title's 100px */
 }
 .community-grid > .wp-block-column {
 	/* !important beats WP core's `.wp-block-column { flex:1 1 0 }`. grow:0 + shrink:0 so
 	   the cards keep their size and WRAP into rows (they don't shrink to cram into one),
-	   and a shorter last row simply centres. basis = (100% - (N-1)*gap) / N. */
-	flex: 0 0 calc((100% - 5rem) / 5) !important;   /* 5 per row on desktop */
+	   and a shorter last row simply centres.
+	   2026-10: fixed 280px square on every screen (Figma) — the row just wraps;
+	   no per-breakpoint column maths. */
+	flex: 0 0 280px !important;
 }
 .community-card {
 	position: relative;            /* anchor for the whole-card link */
 	aspect-ratio: 1 / 1;           /* square cards, like the design */
-	align-items: center;
-	justify-content: center;
+	align-items: flex-start;       /* 2026-10: icon + label left-aligned per Figma */
+	justify-content: flex-start;   /* 2026-10: content sits at the top of the card per Figma */
 	gap: 0.75rem;
-	text-align: center;
+	text-align: left;
 	transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+/* the blocks carry has-text-align-center; Figma has them left-aligned */
+.community-card p {
+	text-align: left !important;
+	margin: 0;
 }
 /* the label link is stretched over the whole card → the entire box is clickable */
 .community-card a,
@@ -1575,19 +1736,27 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 }
 /* label font (icon paragraph keeps its large size) */
 .community-card p:not(.has-x-large-font-size) {
-	line-height: 1.3;
+	line-height: 1;                /* Figma: 30px / 100% / 700 */
+	font-size: clamp(20px, 16.48px + 0.939vw, 30px);   /* fluid like the site's headings: 20px @375 → 30px @1440+ */
+	font-weight: 700;
 }
-/* tablet: 3 per row → 5 wraps to 3 + 2 (last row centred) */
-@media (max-width: 1024px) {
-	.community-grid > .wp-block-column {
-		flex-basis: calc((100% - 2.5rem) / 3) !important;
-	}
+/* Icons (2026-10): each card's icon is an Image block (white PNG from the media library,
+   source files in images/community-*.png), so it is swapped in the editor with Replace —
+   no code. CSS only fixes its size so every icon lines up the same. */
+.community-card {
+	gap: 36px;                     /* Figma: icon → label */
+	padding: 40px 24px !important; /* Figma inset; overrides the block's own padding so every card lines up */
+	flex-wrap: nowrap;             /* WP's flex layout wraps; a long label would jump into a 2nd column beside the icon */
 }
-/* mobile: 2 per row → 5 wraps to 2 + 2 + 1 (last row centred) */
-@media (max-width: 600px) {
-	.community-grid > .wp-block-column {
-		flex-basis: calc((100% - 1.25rem) / 2) !important;
-	}
+.community-card .wp-block-image {
+	margin: 0;
+	flex-shrink: 0;
+}
+.community-card .wp-block-image img {
+	display: block;
+	width: auto !important;        /* the block may carry a resized width/height inline */
+	height: 92px !important;       /* Figma: icon height on the 280px card */
+	max-width: 100%;
 }
 /*--- Early-bird sponsor top bar ---*/
 /* Add class `wca-topbar` to the sticky header Group block (Advanced → Additional CSS class). */
