@@ -1265,6 +1265,23 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 	margin-top: 2.5rem;
 }
 
+/* "all news" button: underline-only like the sponsors one — Global Styles give every
+   button a 4px border on all sides */
+.wca-news .wp-block-button__link {
+	background-color: transparent;
+	color: #1333a6;
+	border: 0;
+	border-bottom: 4px solid #1333a6;
+	border-radius: 0;
+	transition: color .2s ease, border-color .2s ease;
+}
+
+.wca-news .wp-block-button__link:hover,
+.wca-news .wp-block-button__link:focus {
+	color: #0e2578;
+	border-bottom-color: #0e2578;
+}
+
 .wca-news .wp-block-post-template {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
