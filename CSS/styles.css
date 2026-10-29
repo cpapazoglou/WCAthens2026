@@ -1823,3 +1823,614 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 .wca-sponsor-pricing tbody tr:nth-child(2) td:first-child {
 	box-shadow: inset 4px 0 0 #0d266b !important; /* darkest brand blue left accent */
 }
+
+/* ======================== START OF SPEAKERS & SESSIONS ======================== */
+/* Speakers list, speaker single, session single — per Figma (nodes 385-2186 card,
+   385-2197 speaker single, 385-2287 session single). Reusable classes set on the
+   Groups in the editor:
+     .wca-speakers            Group around the speakers Query Loop
+     .wca-speaker-card        Group = one card inside the Post Template
+     .wca-speaker-card__body  right column of the card
+     .wca-speaker-single      white card in the speaker single template
+     .wca-speaker-single__head  avatar + name row
+     .wca-session-single      white card in the session single template
+     .wca-session-single__meta  speaker + category lines
+     .wca-session-box         light-blue box holding wordcamp/speaker-sessions
+   Sizing: every value is the Figma px, reached at >=1200px viewport and scaled
+   down below it — clamp(min, <px/12>vw, <px>). No font-family (the design's
+   Geologica / Open Sans are not loaded on the site; inherits the site font).
+   Local mocks: dev/mock/. 2026-10 */
+
+/* cream page background on any page/template that uses these components */
+body:has(.wca-speakers),
+body:has(.wca-speaker-single),
+body:has(.wca-session-single),
+body:has(.wca-schedule),
+body:has(.wp-block-wordcamp-schedule) {
+	background-color: #faf8f2;
+}
+
+/*--- Speakers list (card 1399 wide, 55 between cards) ---*/
+.wca-speakers {
+	max-width: 1400px !important;
+	margin-inline: auto !important;
+}
+
+.wca-speakers .wp-block-post-template {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: clamp(1.5rem, 4.58vw, 55px);
+}
+
+/* card: white, padding 50, avatar → body 75 */
+.wca-speaker-card {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: flex-start;
+	gap: clamp(1.25rem, 6.25vw, 75px);
+	padding: clamp(1.25rem, 4.17vw, 50px);
+	background-color: #fff;
+}
+
+/* !important + extra classes: the avatar block writes width/height inline, and the
+   theme styles `.wp-block-post-template .type-wcb_speaker .wp-block-wordcamp-avatar`
+   (full width, square, colored bottom border + ::before bar) — undo all of it */
+.wca-speakers .wp-block-post-template .wca-speaker-card .wp-block-wordcamp-avatar {
+	flex: 0 0 auto;
+	width: clamp(96px, 20.83vw, 250px) !important;
+	height: auto !important;
+	aspect-ratio: 1;
+	margin: 0;
+	border: 0;
+	border-radius: 50%;
+}
+
+.wca-speakers .wp-block-post-template .wca-speaker-card .wp-block-wordcamp-avatar::before,
+.single-wcb_speaker .wca-speaker-single .wp-block-wordcamp-avatar::before,
+.single-wcb_speaker .wca-speaker-single .wp-block-wordcamp-avatar::after {
+	content: none;
+}
+
+.wca-speakers .wp-block-post-template .wca-speaker-card .wp-block-wordcamp-avatar img,
+.single-wcb_speaker .wca-speaker-single .wp-block-wordcamp-avatar img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+/* name / bio / session box, 25 apart */
+.wca-speaker-card__body {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: clamp(1rem, 2.08vw, 25px);
+}
+
+.wca-speaker-card__body > *,
+.wca-speaker-single > *,
+.wca-session-single > * {
+	margin: 0 !important;
+}
+
+/* name: 40 bold #2b2b2b */
+.wca-speaker-card .wp-block-post-title,
+.wca-speaker-single .wp-block-post-title {
+	font-size: clamp(1.5rem, 3.33vw, 40px) !important;
+	font-weight: 700;
+	line-height: 1.2;
+	color: #2b2b2b;
+	margin: 0;
+}
+
+.wca-speaker-card .wp-block-post-title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.wca-speaker-card .wp-block-post-title a:hover {
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
+
+/* body text: 22 / 34 */
+.wca-speaker-card .wp-block-post-excerpt__excerpt,
+.wca-speaker-single .wp-block-post-content p,
+.wca-session-single .wp-block-post-content p {
+	font-size: clamp(1rem, 1.83vw, 22px);
+	line-height: 1.545;
+	color: #0c0c0c;
+	margin: 0;
+}
+
+.wca-speaker-card .wp-block-post-excerpt__more-text {
+	display: none;
+}
+
+/*--- Session box (#8fbbfa, padding 50) — list card (gap 25) + speaker single (gap 50) ---*/
+.wca-session-box {
+	display: flex;
+	flex-direction: column;
+	gap: clamp(1rem, 2.08vw, 25px);
+	padding: clamp(1.25rem, 4.17vw, 50px);
+	background-color: #8fbbfa;
+	color: #2b2b2b;
+}
+
+.wca-speaker-single .wca-session-box {
+	gap: clamp(1rem, 4.17vw, 50px);
+}
+
+.wca-session-box > * {
+	margin: 0 !important;
+}
+
+/* speaker with no session yet: the sessions block renders nothing → hide the box */
+.wca-session-box:not(:has(.wp-block-wordcamp-speaker-sessions li)) {
+	display: none;
+}
+
+/* "Ομιλία" label: 35 semibold */
+.wca-session-box .wp-block-heading {
+	font-size: clamp(1.25rem, 2.92vw, 35px) !important;
+	font-weight: 600;
+	line-height: 1.2;
+	color: #2b2b2b;
+}
+
+.wca-session-box .wp-block-wordcamp-speaker-sessions {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: clamp(1rem, 4.17vw, 50px);
+}
+
+.wca-session-box .wp-block-wordcamp-speaker-sessions li {
+	display: flex;
+	flex-direction: column;
+	gap: clamp(.5rem, 2.08vw, 25px);
+}
+
+.wca-session-box .wp-block-wordcamp-speaker-sessions p {
+	margin: 0;
+}
+
+/* session title: 40 bold */
+.wca-session-box .wp-block-wordcamp-speaker-sessions li > p:first-child {
+	font-size: clamp(1.25rem, 3.33vw, 40px);
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+/* theme sets these links to large/700 — the <p> carries the size instead */
+.wca-session-box .wp-block-wordcamp-speaker-sessions a {
+	font-size: inherit;
+	font-weight: inherit;
+	color: inherit;
+	text-decoration: none;
+}
+
+.wca-session-box .wp-block-wordcamp-speaker-sessions a:hover {
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
+
+/* date / time / track: 25 / 45 */
+.wca-session-box .wordcamp-speaker-sessions__session-info {
+	font-size: clamp(1rem, 2.08vw, 25px);
+	line-height: 1.8;
+}
+
+/*--- Speaker single + session single: white card, 1220 wide, padding 55 ---*/
+.wca-speaker-single,
+.wca-session-single {
+	max-width: 1220px !important;
+	margin-inline: auto !important;
+	display: flex;
+	flex-direction: column;
+	padding: clamp(1.25rem, 4.58vw, 55px);
+	background-color: #fff;
+}
+
+/* head → bio 55, bio → session box 50 */
+.wca-speaker-single {
+	gap: clamp(1.25rem, 4.17vw, 50px);
+}
+
+.wca-speaker-single > .wca-speaker-single__head {
+	margin-bottom: clamp(0px, .42vw, 5px) !important;
+}
+
+/* avatar 350 + name, 42 apart, vertically centred */
+.wca-speaker-single__head {
+	display: flex;
+	align-items: center;
+	gap: clamp(1rem, 3.5vw, 42px);
+}
+
+/* .single-wcb_speaker: beat the theme's square avatar with pink/orange blocks */
+.single-wcb_speaker .wca-speaker-single .wp-block-wordcamp-avatar {
+	flex: 0 0 auto;
+	width: clamp(110px, 29.17vw, 350px) !important;
+	height: auto !important;
+	aspect-ratio: 1;
+	margin: 0;
+	border-radius: 50%;
+}
+
+.wca-speaker-single .wp-block-post-content,
+.wca-session-single .wp-block-post-content {
+	display: flex;
+	flex-direction: column;
+}
+
+/* bio paragraphs follow on with no gap (design) */
+.wca-speaker-single .wp-block-post-content {
+	gap: 0;
+}
+
+.wca-speaker-single .wp-block-post-content > *,
+.wca-session-single .wp-block-post-content > * {
+	margin: 0 !important;
+	max-width: none !important;
+}
+
+/*--- Session single (card 1222, padding 55, gap 50) ---*/
+.wca-session-single {
+	gap: clamp(1rem, 4.17vw, 50px);
+}
+
+.wca-session-single .wp-block-post-content {
+	gap: clamp(1rem, 4.17vw, 50px);
+}
+
+.wca-session-single .wp-block-post-content p {
+	color: #2b2b2b;
+}
+
+/* session video: in the design it sits flush under the card's text, edge to edge —
+   pull the embed out over the card's side/bottom padding (same clamp as the padding) */
+.wca-session-single .wp-block-post-content > .wp-block-embed:last-child,
+.wca-session-single .wp-block-post-content > .wp-block-video:last-child,
+.wca-session-single .wp-block-post-content > .wp-block-image:last-child {
+	margin: 0 calc(-1 * clamp(1.25rem, 4.58vw, 55px)) calc(-1 * clamp(1.25rem, 4.58vw, 55px)) !important;
+}
+
+/* core's responsive-embed hack (::before padding-top 56.25% + absolute iframe) would
+   leave a gap under our 2:1 video — let the iframe size itself instead */
+.wca-session-single .wp-block-embed__wrapper::before {
+	content: none !important;
+}
+
+.wca-session-single .wp-block-embed iframe {
+	position: static !important;
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 2 / 1; /* design: 1215 × 608 */
+	border: 0; /* default iframe border pushed it 4px past the card */
+}
+
+/* "Ομιλητής: … / Κατηγορία: …": 40 bold dark blue */
+.wca-session-single__meta {
+	font-size: clamp(1.25rem, 3.33vw, 40px);
+	font-weight: 700;
+	line-height: 1.2;
+	color: #0d266b;
+}
+
+.wca-session-single__meta > * {
+	margin: 0 !important;
+	font-size: inherit !important;
+}
+
+.wca-session-single__meta a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.wca-session-single__meta a:hover {
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
+
+.wca-session-single__meta .wp-block-wordcamp-session-speakers__byline {
+	margin-right: .3em;
+}
+
+@media (max-width: 767px) {
+	.wca-speaker-card {
+		flex-direction: column;
+	}
+
+	.wca-speaker-single__head {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+/* ======================== END OF SPEAKERS & SESSIONS ======================== */
+
+/* ======================== START OF SCHEDULE ======================== */
+/* Schedule page — per Figma (node 385-2295: 385-2299 intro, 385-2304 schedule).
+   Classes set in the editor:
+     .wca-day-intro   light-blue box (e.g. Contributor Day: heading, date, text, button)
+     .wca-schedule    white Group around heading + note + wordcamp/schedule block
+   Same sizing rule as above: Figma px at >=1200px, clamp() below. Overrides the
+   legacy schedule rules above (Lora 26px) only inside .wca-schedule. The block's
+   grid kicks in at >=550px (plugin CSS); below that sessions stack. No
+   font-family (design uses Mulish, not loaded on the site). 2026-10 */
+.wca-day-intro,
+.wca-schedule {
+	max-width: 1220px !important;
+	margin-inline: auto !important;
+}
+
+/* intro box: #ecf4fe, padding 55, gap 35 */
+.wca-day-intro {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: clamp(1rem, 2.92vw, 35px);
+	padding: clamp(1.25rem, 4.58vw, 55px);
+	background-color: #ecf4fe;
+	color: #2b2b2b;
+}
+
+.wca-day-intro > *,
+.wca-schedule > * {
+	margin-block: 0 !important;
+}
+
+/* headings: 40 bold dark blue */
+.wca-day-intro .wp-block-heading,
+.wca-schedule > .wp-block-heading {
+	font-size: clamp(1.5rem, 3.33vw, 40px) !important;
+	font-weight: 700;
+	line-height: 1.2;
+	color: #0d266b;
+}
+
+/* dates: 35 semibold */
+.wca-day-intro .wca-day-intro__date,
+.wp-block-wordcamp-schedule .wordcamp-schedule__date {
+	font-size: clamp(1.25rem, 2.92vw, 35px) !important;
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+/* text: 22 / 34 */
+.wca-day-intro p:not(.wca-day-intro__date),
+.wca-schedule > p {
+	font-size: clamp(1rem, 1.83vw, 22px);
+	line-height: 1.545;
+}
+
+/* "Περισσότερα": white, 2px blue border, padding 25/70, 34 bold, tracked 1.36 */
+.wca-day-intro .wp-block-button__link {
+	padding: clamp(.75rem, 2.08vw, 25px) clamp(1.5rem, 5.83vw, 70px) !important;
+	background-color: #fff !important;
+	border: 2px solid #1333a6 !important;
+	border-radius: 0 !important;
+	color: #1333a6 !important;
+	font-size: clamp(1.125rem, 2.83vw, 34px) !important;
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: .04em;
+}
+
+/* schedule box: 125 below the intro; header padding 55, gap 35; 55 above the grid */
+.wca-schedule {
+	margin-top: clamp(2rem, 10.42vw, 125px) !important;
+	display: flex;
+	flex-direction: column;
+	gap: clamp(1rem, 2.92vw, 35px);
+	padding-top: clamp(1.25rem, 4.58vw, 55px);
+	background-color: #fff;
+	color: #0c0c0c;
+}
+
+.wca-schedule > :not(.wp-block-wordcamp-schedule),
+.wp-block-wordcamp-schedule .wordcamp-schedule__date {
+	padding-inline: clamp(1.25rem, 4.58vw, 55px);
+}
+
+/* the block on its own (no .wca-schedule Group around it) is the white card:
+   1220 wide, 55 above the first date */
+.wp-block-wordcamp-schedule {
+	max-width: 1220px !important;
+	margin-inline: auto !important;
+	padding-top: clamp(1.25rem, 4.58vw, 55px);
+	background-color: #fff;
+}
+
+/* 125 between the intro box and the schedule (the page's block gap is 0) */
+.wca-day-intro + .wp-block-wordcamp-schedule {
+	margin-top: clamp(2rem, 10.42vw, 125px) !important;
+}
+
+/* inside .wca-schedule the Group is already the card */
+.wca-schedule .wp-block-wordcamp-schedule {
+	max-width: none !important;
+	width: 100%;
+	padding-top: 0;
+}
+
+/* 2nd, 3rd… day: space above its date */
+.wp-block-wordcamp-schedule .wordcamp-schedule__day ~ .wordcamp-schedule__date {
+	margin-top: clamp(2rem, 6.25vw, 75px) !important;
+}
+
+.wp-block-wordcamp-schedule .wordcamp-schedule__date {
+	margin: 0 0 clamp(1.25rem, 4.58vw, 55px);
+	color: #0c0c0c;
+}
+
+/* legacy rules above set Lora 26px on day/session/time/title/p — the design doesn't,
+   so hand the site font back (font-family: inherit, not a new font) */
+.wp-block-wordcamp-schedule .wordcamp-schedule__day,
+.wp-block-wordcamp-schedule .wordcamp-schedule__day * {
+	font-family: inherit;
+}
+
+/* !important below: the theme's Global Styles CSS paints the schedule yellow with
+   `.wordcamp-schedule .wordcamp-schedule__*` rules that use !important themselves */
+/* grid: 2px white lines between columns, rows touch (hairline at the bottom of cells) */
+.wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__day {
+	width: 100%; /* legacy rule above (same selector) sets fit-content: days shrank to their text */
+	gap: 0 2px !important;
+	margin: 0;
+	background: #fff !important;
+}
+
+/* header row + time column: #69a5f8, rows 153 high (54 + 45 + 54) */
+.wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__column-header,
+.wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__time-slot-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 !important;
+	padding: clamp(.625rem, 4.5vw, 54px) clamp(.5rem, 1vw, 12px) !important;
+	background: #69a5f8 !important;
+	border: 0 !important;
+	color: #0c0c0c;
+	text-align: center;
+	line-height: 1.25;
+}
+
+/* time column 168 wide (the plugin sizes it `auto`) */
+.wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__column-header.is-column-time,
+.wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__time-slot-header {
+	min-width: clamp(4.5rem, 14vw, 168px);
+}
+
+/* track names: 36 bold, line 45, tracked 0.72 */
+.wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__column-header {
+	font-size: clamp(1.125rem, 3vw, 36px);
+	font-weight: 700;
+	letter-spacing: .02em;
+}
+
+/* "Time" + times: 30 medium */
+.wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__column-header.is-column-time,
+.wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__time-slot-header {
+	font-size: clamp(1rem, 2.5vw, 30px);
+	font-weight: 500;
+	letter-spacing: 0;
+	line-height: 1.2;
+}
+
+/* session cells: 153 high, text 252 wide in a 350 cell (≈49 each side) */
+.wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__session {
+	position: relative;
+	box-sizing: border-box; /* padding inside the 153 (was 153 + 48 + 1 = 202) */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: clamp(.25rem, .83vw, 10px);
+	min-height: clamp(4.5rem, 12.75vw, 153px);
+	margin: 0;
+	padding: clamp(.75rem, 2vw, 24px) clamp(.75rem, 4.08vw, 49px);
+	font-size: 1rem;
+	background-color: #dae8fd !important;
+	border: 0 !important;
+	border-bottom: 1px solid rgba(12, 12, 12, .2) !important;
+	text-align: center;
+}
+
+/* breaks / registration (custom type) a shade darker */
+.wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__session.is-type-custom {
+	background-color: #b4d2fb !important;
+}
+
+.wp-block-wordcamp-schedule .wordcamp-schedule__session > * {
+	margin: 0;
+}
+
+/* session title: 30 medium */
+.wp-block-wordcamp-schedule h4.wordcamp-schedule__session-title {
+	display: block;
+	font: inherit;
+	font-size: clamp(1rem, 2.5vw, 30px);
+	font-weight: 500;
+	line-height: 1.2;
+	color: #0c0c0c;
+	text-align: center !important;
+}
+
+.wp-block-wordcamp-schedule .wordcamp-schedule__session-title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.wp-block-wordcamp-schedule .wordcamp-schedule__session-title a:hover {
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
+
+/* the line under the title (time range): 20 semibold black, as the design's subtitle */
+.wp-block-wordcamp-schedule .wordcamp-schedule__session > p {
+	font-size: clamp(.875rem, 1.67vw, 20px);
+	font-weight: 600;
+	line-height: 1.4; /* legacy rule sets 40px */
+	color: #000;
+}
+
+/* tracks/categories repeat the column headers — hide in the grid */
+.wp-block-wordcamp-schedule .wordcamp-schedule__session-tracks,
+.wp-block-wordcamp-schedule .wordcamp-schedule__session-category {
+	display: none;
+}
+
+.wp-block-wordcamp-schedule .wordcamp-schedule__session-speakers dd {
+	display: inline;
+	margin: 0;
+}
+
+.wp-block-wordcamp-schedule .wordcamp-schedule__session-speakers dd + dd::before {
+	content: ", ";
+}
+
+/* speakers: 16 semibold, line 24, blue */
+.wp-block-wordcamp-schedule .wordcamp-schedule__session-speakers a {
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.5;
+	color: #1333a6;
+	text-decoration: none;
+}
+
+/* favourite star: 24px, 21 from the top, ≈34 from the right */
+.wp-block-wordcamp-schedule .wcb-session-favourite-icon {
+	position: absolute;
+	top: clamp(.4rem, 1.75vw, 21px);
+	right: clamp(.4rem, 2.83vw, 34px);
+}
+
+/* black star, as in the design. Theme CSS greys it with `div.wcb-session-favourite-icon
+   a.fav-session-button` — match it; favourited sessions keep Juan's yellow (rule above) */
+.wp-block-wordcamp-schedule .wordcamp-schedule__session:not(.wcb-favourite-session) div.wcb-session-favourite-icon a.fav-session-button {
+	color: #0c0c0c;
+}
+
+/* !important: the plugin writes the 16px size inline on the icon */
+.wp-block-wordcamp-schedule .fav-session-button .dashicons {
+	font-size: clamp(16px, 2vw, 24px) !important;
+	width: clamp(16px, 2vw, 24px) !important;
+	height: clamp(16px, 2vw, 24px) !important;
+}
+
+/* below 550px the plugin drops the grid and stacks sessions: the track headers
+   would pile up at the top with nothing under them */
+@media (max-width: 549px) {
+	.wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__column-header {
+		display: none;
+	}
+}
+/* ======================== END OF SCHEDULE ======================== */
