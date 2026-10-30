@@ -1220,6 +1220,18 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 	}
 }
 
+/* Variant (Figma schedule page, node 385-2398): ONE button, bottom-centre, at every
+   width. Add class `wca-sponsors--bottom-button` next to `wca-sponsors` on the section
+   and put the button only at the bottom (direct child, after the last tier). 2026-10 */
+.wca-sponsors.wca-sponsors--bottom-button > .wp-block-buttons {
+	display: flex;
+	margin-top: clamp(1.25rem, 2.5vw, 30px);
+}
+
+.wca-sponsors.wca-sponsors--bottom-button > .wp-block-group .wp-block-buttons {
+	display: none;
+}
+
 @media (max-width: 767px) {
 	.wca-sponsors .wp-block-post-template {
 		gap: 1rem;
@@ -2212,17 +2224,19 @@ body:has(.wp-block-wordcamp-schedule) {
 	line-height: 1.545;
 }
 
-/* "Περισσότερα": white, 2px blue border, padding 25/70, 34 bold, tracked 1.36 */
-.wca-day-intro .wp-block-button__link {
+/* "Περισσότερα" / "Όλοι οι χορηγοί": white, blue border, padding 25/70, 34 bold, tracked 1.36.
+   Reusable: add class `wca-btn-outline` to any Buttons block to get this button. */
+.wca-day-intro .wp-block-button__link,
+.wca-btn-outline .wp-block-button__link {
 	padding: clamp(.75rem, 2.08vw, 25px) clamp(1.5rem, 5.83vw, 70px) !important;
 	background-color: #fff !important;
-	border: 2px solid #1333a6 !important;
+	border: 3px solid #1333a6 !important;
 	border-radius: 0 !important;
 	color: #1333a6 !important;
 	font-size: clamp(1.125rem, 2.83vw, 34px) !important;
-	font-weight: 700;
+	font-weight: 700 !important;
 	line-height: 1.2;
-	letter-spacing: .04em;
+	letter-spacing: .04em !important; /* the editor writes letter-spacing inline on copied buttons */
 }
 
 /* schedule box: 125 below the intro; header padding 55, gap 35; 55 above the grid */
@@ -2292,6 +2306,7 @@ body:has(.wp-block-wordcamp-schedule) {
 /* header row + time column: #69a5f8, rows 153 high (54 + 45 + 54) */
 .wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__column-header,
 .wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__time-slot-header {
+	box-sizing: border-box; /* time column = 168 incl. padding (was 168 + 24 = 192) */
 	display: flex;
 	align-items: center;
 	justify-content: center;
