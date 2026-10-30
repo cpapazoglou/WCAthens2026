@@ -2157,6 +2157,22 @@ body:has(.wp-block-wordcamp-schedule) {
 	margin-right: .3em;
 }
 
+/* "Κατηγορία:" — core greys the post-terms prefix; design keeps the whole line dark blue */
+.wca-session-single__meta .wp-block-post-terms__prefix {
+	color: inherit;
+}
+
+/* if the name is wrapped in a Group inside the head row: drop the theme's global padding */
+.wca-speaker-single__head > .wp-block-group {
+	flex: 1;
+	min-width: 0;
+	padding: 0 !important;
+}
+
+.wca-speaker-single__head > .wp-block-group > * {
+	margin: 0 !important;
+}
+
 @media (max-width: 767px) {
 	.wca-speaker-card {
 		flex-direction: column;
