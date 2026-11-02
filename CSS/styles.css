@@ -1112,13 +1112,17 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 	width: calc((100% - 6rem) / 5);      /* 5 per row */
 }
 
-/* logo cell — plain like 2025 (no card), centered; 120px default, per-package
+/* logo cell — white card (radius 8, shadow 0 0 8 black 25%), centered; 120px default, per-package
    height set below. NB: heights are plain px (not CSS custom properties) — the
    WordCamp CSS sanitizer strips `--custom-prop:` declarations, so a var()
    approach silently fell back to the default. */
 .wca-sponsors .wp-block-post-featured-image {
 	margin: 0;
 	height: 120px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 8px rgba(0, 0, 0, .25);
+	overflow: hidden;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -1167,6 +1171,12 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 	   logos. Scoped to our .wca-sponsors img only. */
 	object-fit: contain !important;
 	aspect-ratio: auto;
+}
+
+/* the section lives in the footer template part (2026-11); the home page has
+   its own copy in the content, so hide the footer one there */
+.home footer .wca-sponsors {
+	display: none !important;
 }
 
 /* logo-wall needs no pager; hide it if a Pagination block was left in */
@@ -2341,17 +2351,17 @@ body:has(.wp-block-wordcamp-schedule) {
 	min-width: clamp(4.5rem, 14vw, 168px);
 }
 
-/* track names: 36 bold, line 45, tracked 0.72 */
+/* track names: 28 bold, tracked 0.72 (design 36, smaller per client 2026-11) */
 .wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__column-header {
-	font-size: clamp(1.125rem, 3vw, 36px);
+	font-size: clamp(1rem, 2.33vw, 28px);
 	font-weight: 700;
 	letter-spacing: .02em;
 }
 
-/* "Time" + times: 30 medium */
+/* "Time" + times: 24 medium (design 30, smaller per client 2026-11) */
 .wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__column-header.is-column-time,
 .wp-block-wordcamp-schedule .wordcamp-schedule .wordcamp-schedule__time-slot-header {
-	font-size: clamp(1rem, 2.5vw, 30px);
+	font-size: clamp(.9375rem, 2vw, 24px);
 	font-weight: 500;
 	letter-spacing: 0;
 	line-height: 1.2;
@@ -2384,11 +2394,11 @@ body:has(.wp-block-wordcamp-schedule) {
 	margin: 0;
 }
 
-/* session title: 30 medium */
+/* session title: 22 medium (design 30, smaller per client 2026-11) */
 .wp-block-wordcamp-schedule h4.wordcamp-schedule__session-title {
 	display: block;
 	font: inherit;
-	font-size: clamp(1rem, 2.5vw, 30px);
+	font-size: clamp(.9375rem, 1.83vw, 22px);
 	font-weight: 500;
 	line-height: 1.2;
 	color: #0c0c0c;
@@ -2405,9 +2415,9 @@ body:has(.wp-block-wordcamp-schedule) {
 	text-underline-offset: 4px;
 }
 
-/* the line under the title (time range): 20 semibold black, as the design's subtitle */
+/* the line under the title (time range): 17 semibold black (design 20, smaller per client 2026-11) */
 .wp-block-wordcamp-schedule .wordcamp-schedule__session > p {
-	font-size: clamp(.875rem, 1.67vw, 20px);
+	font-size: clamp(.8125rem, 1.42vw, 17px);
 	font-weight: 600;
 	line-height: 1.4; /* legacy rule sets 40px */
 	color: #000;
@@ -2428,9 +2438,9 @@ body:has(.wp-block-wordcamp-schedule) {
 	content: ", ";
 }
 
-/* speakers: 16 semibold, line 24, blue */
+/* speakers: 15 semibold, line 24, blue (design 16, smaller per client 2026-11) */
 .wp-block-wordcamp-schedule .wordcamp-schedule__session-speakers a {
-	font-size: 1rem;
+	font-size: .9375rem;
 	font-weight: 600;
 	line-height: 1.5;
 	color: #1333a6;
