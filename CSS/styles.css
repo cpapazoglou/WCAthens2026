@@ -1432,8 +1432,8 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
    content area, not body — the footer stays white. Home is untouched (there the Query sits
    inside the .wca-news Group, not directly in the content). 2026-11 */
 .wp-block-post-content:has(> .wp-block-query .wca-news),
-main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-spacer {
-	background-color: #faf8f2;   /* + the page template's 100px spacers above/below the content */
+main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-spacer:has(+ .wp-block-post-content) {
+	background-color: #faf8f2;   /* + the page template's 100px spacer above the content (not the one below) */
 }
 
 /* the Νέα page template has a 100px spacer under the excerpt — dead space in a card */
