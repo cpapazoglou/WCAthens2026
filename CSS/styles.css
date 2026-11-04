@@ -1412,18 +1412,27 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 	border-bottom-color: #1333a6;
 }
 
-/* the Νέα page Query also carries legacy `.web-log-2024`, whose "more" link is a yellow
-   !important button (see Blog section) — reset it to the underline link. 2026-11 */
-.wca-news .web-log-2024 .wp-block-post-excerpt__more-link,
-.wca-news .web-log-2024 .wp-block-post-excerpt__more-link:hover {
+/* the Νέα page Query also carries legacy `.web-log-2024` (above or below .wca-news), whose
+   "more" link is a yellow !important button (see Blog section) — reset it to the underline
+   link. Same specificity + later in the file wins, whatever the nesting. 2026-11 */
+.wca-news .wp-block-post-excerpt__more-link,
+.wca-news .wp-block-post-excerpt__more-link:hover {
 	margin-top: 0;
 	background-color: transparent !important;
 	border: 0 !important;
 	border-bottom: 2px solid #5091ff !important;
 }
 
-.wca-news .web-log-2024 li:hover .wp-block-post-excerpt__more-link {
+.wca-news li:hover .wp-block-post-excerpt__more-link {
 	border-bottom-color: #1333a6 !important;
+}
+
+/* news archive page (Query Loop straight in the page content, .wca-news Group inside it):
+   cream content background like Figma, no slug/id so EL + EN pages both match. Only the
+   content area, not body — the footer stays white. Home is untouched (there the Query sits
+   inside the .wca-news Group, not directly in the content). 2026-11 */
+.wp-block-post-content:has(> .wp-block-query .wca-news) {
+	background-color: #faf8f2;
 }
 
 /* the Νέα page template has a 100px spacer under the excerpt — dead space in a card */
