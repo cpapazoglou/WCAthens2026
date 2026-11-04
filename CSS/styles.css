@@ -1412,6 +1412,25 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 	border-bottom-color: #1333a6;
 }
 
+/* the Νέα page Query also carries legacy `.web-log-2024`, whose "more" link is a yellow
+   !important button (see Blog section) — reset it to the underline link. 2026-11 */
+.wca-news .web-log-2024 .wp-block-post-excerpt__more-link,
+.wca-news .web-log-2024 .wp-block-post-excerpt__more-link:hover {
+	margin-top: 0;
+	background-color: transparent !important;
+	border: 0 !important;
+	border-bottom: 2px solid #5091ff !important;
+}
+
+.wca-news .web-log-2024 li:hover .wp-block-post-excerpt__more-link {
+	border-bottom-color: #1333a6 !important;
+}
+
+/* the Νέα page template has a 100px spacer under the excerpt — dead space in a card */
+.wca-news .wp-block-post-template > li > .wp-block-spacer {
+	display: none;
+}
+
 @media (max-width: 1023px) {
 	.wca-news .wp-block-post-template > li > :not(.wp-block-post-featured-image) {
 		margin-left: 1rem;
