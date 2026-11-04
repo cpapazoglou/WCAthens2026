@@ -1180,6 +1180,10 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 	display: none !important;
 }
 
+footer .wca-sponsors {
+	padding-top: 5rem !important;
+}
+
 /* logo-wall needs no pager; hide it if a Pagination block was left in */
 .wca-sponsors .wp-block-query-pagination {
 	display: none;
