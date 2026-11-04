@@ -1431,8 +1431,9 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
    cream content background like Figma, no slug/id so EL + EN pages both match. Only the
    content area, not body — the footer stays white. Home is untouched (there the Query sits
    inside the .wca-news Group, not directly in the content). 2026-11 */
-.wp-block-post-content:has(> .wp-block-query .wca-news) {
-	background-color: #faf8f2;
+.wp-block-post-content:has(> .wp-block-query .wca-news),
+main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-spacer {
+	background-color: #faf8f2;   /* + the page template's 100px spacers above/below the content */
 }
 
 /* the Νέα page template has a 100px spacer under the excerpt — dead space in a card */
