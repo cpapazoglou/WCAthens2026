@@ -1993,6 +1993,11 @@ body.page-slug-en .wp-block-navigation__container.lang-en {
 	justify-content: center;
 	gap: 8px 18px !important;
 }
+/* EL/EN bars: the !important flex above beats the generic .lang-en hide, so hide the wrong language here. 2026-11 */
+body:not(.page-slug-en) .wca-topbar.lang-en,
+body.page-slug-en .wca-topbar.lang-el {
+	display: none !important;
+}
 .wca-topbar p,
 .wca-topbar .wp-block-buttons {
 	margin: 0 !important;
