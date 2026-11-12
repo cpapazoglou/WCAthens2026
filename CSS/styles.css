@@ -228,6 +228,103 @@ ul.organizers-index li a {
 	display: none;
 }
 
+/* ======================== START OF HEADER NAV RESPONSIVE ======================== */
+/* 2026-11: header row = logo + core Navigation + social links. Core shows the
+   hamburger only below 600px, so 600–1500px wrapped into 2–3 messy rows.
+   >=1200: one row — logo, item font and item gap scale down together from
+   full size at 1700px to 120px / 17.5px / 20px at 1200px; social never shrink.
+   <1200: hamburger + overlay (core overlay works at any width once the toggle
+   is visible); social sit next to the hamburger. Social are hidden <=782px by
+   the block's own visibility setting in the Site Editor, not here. */
+header .wp-block-group:has(> .wp-block-site-logo) {
+	flex-wrap: nowrap !important;
+	gap: 24px;
+}
+
+header .wp-block-site-logo,
+header .wp-block-group:has(> .wp-block-site-logo) > .wp-block-social-links {
+	flex-shrink: 0;
+}
+
+header .wp-block-site-logo img {
+	width: clamp(120px, calc(12vw - 24px), 180px) !important;
+	height: auto !important;
+}
+
+@media (min-width: 1200px) {
+	header .wp-block-navigation {
+		font-size: clamp(17.5px, calc(0.9vw + 6.7px), 22px) !important;
+	}
+
+	header .wp-block-navigation .wp-block-navigation__container {
+		gap: clamp(20px, calc(6vw - 52px), 50px) !important;
+		flex-wrap: nowrap !important;
+	}
+
+	header .wp-block-navigation .wp-block-navigation__container > li > .wp-block-navigation-item__content {
+		white-space: nowrap;
+	}
+
+	/* editor sets a 60px left margin on the social block; space-between already spaces it */
+	header .wp-block-group:has(> .wp-block-site-logo) > .wp-block-social-links {
+		margin-left: 0 !important;
+	}
+}
+
+@media (max-width: 1199px) {
+	header .wp-block-navigation.is-responsive .wp-block-navigation__responsive-container-open:not(.always-shown) {
+		display: flex !important;
+	}
+
+	header .wp-block-navigation.is-responsive .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+		display: none !important;
+	}
+
+	/* logo left, social + hamburger together on the right */
+	header .wp-block-group:has(> .wp-block-site-logo) > .wp-block-social-links {
+		order: 1;
+		margin-left: auto !important;
+	}
+
+	header .wp-block-group:has(> .wp-block-site-logo) > .wp-block-navigation {
+		order: 2;
+	}
+}
+
+/*--- open overlay menu (any width): main items bold with dividers, sub items lighter + indented ---*/
+header .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__container {
+	gap: 0 !important;
+	width: 100%;
+}
+
+header .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__container > li {
+	width: 100%;
+	padding: 14px 0 !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+	font-size: 20px !important;
+	font-weight: 700;
+	font-family: inherit !important; /* same font as the desktop menu (legacy <=767 rule set Lora) */
+	margin-bottom: 0 !important;
+}
+
+header .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__submenu-container {
+	padding: 6px 0 0 16px !important;
+	gap: 0 !important;
+}
+
+header .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__submenu-container > li {
+	margin-bottom: 0 !important;
+	font-family: inherit !important;
+}
+
+header .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+	padding: 6px 0 !important;
+	font-size: 16px !important;
+	font-weight: 400 !important;
+	opacity: 0.85;
+}
+/* ======================== END OF HEADER NAV RESPONSIVE ======================== */
+
 /*--- HOME ---*/
 .bg-shape-community {
 	background-size: contain !important;
