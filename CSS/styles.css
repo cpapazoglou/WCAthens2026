@@ -1172,6 +1172,56 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 	object-fit: contain !important;
 }
 
+/* ======================== START OF HOME HERO ======================== */
+/* Media & Text block with Additional CSS class "wca-hero" (2026-11-12).
+   Core stacks it only at 600px; between 600 and 1300 the text column got too narrow
+   and the H1 broke "WordCamp" mid-word (overflow-wrap: anywhere). */
+.wca-hero.wp-block-media-text h1 {
+	overflow-wrap: normal !important;
+}
+
+@media (max-width: 1300px) {
+	.wca-hero.wp-block-media-text {
+		padding-left: var(--wp--preset--spacing--40) !important;
+	}
+	.wca-hero.wp-block-media-text h1 {
+		font-size: clamp(40px, 5vw, 64px) !important;
+	}
+}
+
+/* Tablet: keep two columns, give the text the wider one */
+@media (max-width: 1024px) {
+	.wca-hero.wp-block-media-text.has-media-on-the-right {
+		grid-template-columns: 1fr 42% !important;
+	}
+	.wca-hero.wp-block-media-text > .wp-block-media-text__content {
+		padding-left: 0 !important;
+	}
+}
+
+/* Mobile: stack, image uncropped on top, text below (same order as core) */
+@media (max-width: 767px) {
+	.wca-hero.wp-block-media-text.has-media-on-the-right {
+		grid-template-columns: 100% !important;
+		padding-top: var(--wp--preset--spacing--40) !important;
+		padding-right: var(--wp--preset--spacing--40) !important;
+	}
+	.wca-hero.wp-block-media-text > .wp-block-media-text__media {
+		grid-column: 1 !important;
+		grid-row: 1 !important;
+	}
+	.wca-hero.wp-block-media-text > .wp-block-media-text__content {
+		grid-column: 1 !important;
+		grid-row: 2 !important;
+		padding: var(--wp--preset--spacing--40) 0 !important;
+	}
+	.wca-hero.wp-block-media-text > .wp-block-media-text__media img {
+		width: 100%;
+		height: auto;
+	}
+}
+/* ======================== END OF HOME HERO ======================== */
+
 /* ======================== START OF HOME SPONSORS SECTION ======================== */
 /* Home sponsors section (reusable) — style a Query Loop of wcb_sponsor
    (core/query + post-template + post-featured-image) like the 2025 site.
