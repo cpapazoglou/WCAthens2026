@@ -1721,6 +1721,10 @@ body.page-slug-en .lang-el {
 body.page-slug-en .lang-en {
   display: block;
 }
+/* Single Button blocks: core .wp-block-buttons > .wp-block-button (inline-block) beats .lang-en. 2026-11 */
+body:not(.page-slug-en) .wp-block-button.lang-en {
+  display: none;
+}
 body.page-slug-en .is-layout-flex.lang-en,
 body.page-slug-en .wp-block-navigation__container.lang-en {
   display: flex;
