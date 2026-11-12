@@ -1325,6 +1325,7 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 /* the section lives in the footer template part (2026-11); home and the sponsors
    page have their own copy in the content, so hide the footer one there */
 .home footer .wca-sponsors,
+.page-template-frontpage-en footer .wca-sponsors,
 .page-slug-sponsors footer .wca-sponsors {
 	display: none !important;
 }
