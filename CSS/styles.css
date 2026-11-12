@@ -231,11 +231,13 @@ ul.organizers-index li a {
 /* ======================== START OF HEADER NAV RESPONSIVE ======================== */
 /* 2026-11: header row = logo + core Navigation + social links. Core shows the
    hamburger only below 600px, so 600–1500px wrapped into 2–3 messy rows.
-   >=1200: one row — logo, item font and item gap scale down together from
-   full size at 1700px to 120px / 17.5px / 20px at 1200px; social never shrink.
-   <1200: hamburger + overlay (core overlay works at any width once the toggle
-   is visible); social sit next to the hamburger. Social are hidden <=782px by
-   the block's own visibility setting in the Site Editor, not here. */
+   1200px and up: one row — logo, item font and item gap scale down together
+   from full size at 1700px to 120px / 17.5px / 20px at 1200px; social never shrink.
+   Below 1200px: hamburger + overlay (core overlay works at any width once the
+   toggle is visible); social sit next to the hamburger. Social are hidden at
+   782px and below by the block's own visibility setting in the Site Editor.
+   NOTE: no less-than / greater-than signs in comments here — the Remote CSS
+   sanitizer strips them as HTML tags and eats the comment end. */
 header .wp-block-group:has(> .wp-block-site-logo) {
 	flex-wrap: nowrap !important;
 	gap: 24px;
@@ -303,7 +305,7 @@ header .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigat
 	border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 	font-size: 20px !important;
 	font-weight: 700;
-	font-family: inherit !important; /* same font as the desktop menu (legacy <=767 rule set Lora) */
+	font-family: inherit !important; /* same font as the desktop menu (legacy mobile rule set Lora) */
 	margin-bottom: 0 !important;
 }
 
