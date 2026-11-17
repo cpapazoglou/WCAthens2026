@@ -1311,8 +1311,6 @@ h4.wordcamp-schedule__session-title, .wordcamp-schedule__day p {
 
 /* logo never distorts, never overflows the cell */
 .wca-sponsors .wp-block-post-featured-image img {
-	width: auto;
-	height: auto;
 	max-width: 100%;
 	max-height: 100%;
 	padding: 1rem;
