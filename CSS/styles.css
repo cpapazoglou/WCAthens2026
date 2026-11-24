@@ -1625,10 +1625,37 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 	margin: 0 !important;
 }
 
+/* live home outputs blockGap 0 (grid + flex gap: 0), so cards stuck together
+   and texts inside a card touched. Gaps set here instead. 2026-11 */
+.wca-keypoints__grid,
+.wca-keypoints__ctas,
+.wca-workshops .is-layout-grid {
+	gap: var(--wp--preset--spacing--30) !important;
+}
+
+.wca-keypoint {
+	gap: .6rem !important;
+}
+
 /* space between the stacked home sections (live home has no block gap between them) */
 .wca-workshops,
 .wca-speakers-home {
 	margin-top: var(--wp--preset--spacing--40) !important;
+}
+
+/* speakers: heading / grid / button touched (blockGap 0 on live) */
+.wca-speakers-home > .wp-block-heading {
+	margin-bottom: var(--wp--preset--spacing--20) !important;
+}
+
+.wca-speakers-home > .wp-block-buttons {
+	margin-top: var(--wp--preset--spacing--30) !important;
+}
+
+/* "All speakers": same size as the card buttons, not the global big one */
+.wca-speakers-home > .wp-block-buttons .wp-block-button__link {
+	font-size: .9rem !important;
+	padding: .55em 1.2em !important;
 }
 
 /* button always at the bottom, cards of one row line up */
@@ -1658,16 +1685,23 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 /* Hover: the global button hovers fight each other here (border 4px→3px jump,
    blue-on-blue). One clear swap per button, same border width. Selectors carry
    the extra element/class to beat `.wp-block-buttons:not(…) .is-style-outline …:hover`. */
+/* live base border is 3px (mock had 4px): pin 3px everywhere so hover never jumps.
+   Card hover = fill blue (white-on-white card showed no change). 2026-11 */
+:is(.wca-keypoints, .wca-workshops, .wca-speakers-home) .wp-block-buttons .wp-block-button a.wp-block-button__link {
+	border-width: 3px !important;
+	border-style: solid !important;
+}
+
 :is(.wca-keypoint, .wca-speakers-home) .wp-block-buttons .wp-block-button.is-style-outline a.wp-block-button__link:is(:hover, :focus-visible) {
-	background-color: #fff !important;
-	color: #1333A6 !important;
-	border: 4px solid #1333A6 !important;
+	background-color: #1333A6 !important;
+	color: #fff !important;
+	border-color: #1333A6 !important;
 }
 
 .wca-keypoints__cta .wp-block-cover__inner-container .wp-block-buttons .wp-block-button a.wp-block-button__link:is(:hover, :focus-visible) {
 	background-color: #fff !important;
 	color: var(--wp--preset--color--custom-eastern-blue-100) !important;
-	border: 4px solid #fff !important;
+	border-color: #fff !important;
 }
 
 /*--- photo CTAs ---*/
