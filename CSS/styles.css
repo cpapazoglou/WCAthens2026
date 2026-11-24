@@ -1633,6 +1633,26 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 	gap: var(--wp--preset--spacing--30) !important;
 }
 
+/* 2-col grids (photo CTAs, workshops): WP computes the columns as `50% - 0rem`
+   (blockGap 0), so any real gap pushed them to 1 column. Columns set here. */
+.wca-keypoints__ctas,
+.wca-workshops .is-layout-grid {
+	grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+/* 1 column up to tablet: at 768px the site-size buttons wrapped to 2 lines */
+@media (max-width: 1023px) {
+	.wca-keypoints__ctas,
+	.wca-workshops .is-layout-grid {
+		grid-template-columns: minmax(0, 1fr) !important;
+	}
+}
+
+/* cards grid and photo CTAs below it touched */
+.wca-keypoints__ctas {
+	margin-top: var(--wp--preset--spacing--30) !important;
+}
+
 .wca-keypoint {
 	gap: .6rem !important;
 }
@@ -1652,12 +1672,6 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 	margin-top: var(--wp--preset--spacing--30) !important;
 }
 
-/* "All speakers": same size as the card buttons, not the global big one */
-.wca-speakers-home > .wp-block-buttons .wp-block-button__link {
-	font-size: .9rem !important;
-	padding: .55em 1.2em !important;
-}
-
 /* button always at the bottom, cards of one row line up */
 .wca-keypoint .wp-block-buttons {
 	margin-top: auto !important;
@@ -1675,11 +1689,6 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 .wca-keypoints__cta h3 {
 	font-size: clamp(1.3rem, 1.1rem + .8vw, 1.75rem);
 	line-height: 1.2;
-}
-
-.wca-keypoint .wp-block-button__link {
-	font-size: .9rem;
-	padding: .55em 1.2em;
 }
 
 /* Hover: the global button hovers fight each other here (border 4px→3px jump,
