@@ -1640,8 +1640,7 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 	grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 }
 
-/* 1 column up to tablet: at 768px the site-size buttons wrapped to 2 lines */
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
 	.wca-keypoints__ctas,
 	.wca-workshops .is-layout-grid {
 		grid-template-columns: minmax(0, 1fr) !important;
@@ -1661,6 +1660,11 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 .wca-workshops,
 .wca-speakers-home {
 	margin-top: var(--wp--preset--spacing--40) !important;
+}
+
+/* last section on home: button touched the footer */
+.wca-speakers-home {
+	margin-bottom: var(--wp--preset--spacing--50) !important;
 }
 
 /* speakers: heading / grid / button touched (blockGap 0 on live) */
@@ -1683,6 +1687,12 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 	letter-spacing: .06em;
 	font-weight: 700;
 	opacity: .75;
+}
+
+/* buttons: site style (Open Sans 700, 3px border, blue fill on hover) at a compact size */
+:is(.wca-keypoints, .wca-workshops, .wca-speakers-home) .wp-block-buttons .wp-block-button a.wp-block-button__link {
+	font-size: 1rem !important;
+	padding: .7em 1.6em !important;
 }
 
 .wca-keypoint h3,
