@@ -1881,7 +1881,10 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: .4rem;
+	/* group counted 0px tall, so the button below sat on the dots */
+	min-height: .55rem;
 	margin-top: .75rem;
+	margin-bottom: 1.5rem;
 }
 
 .wca-speakers-mini .wp-block-post-template > li::scroll-marker {
