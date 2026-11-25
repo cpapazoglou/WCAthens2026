@@ -2052,8 +2052,16 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 
 @media (max-width: 767px) {
 	.wca-speakers-mini .wp-block-post-template {
-		grid-auto-columns: 10rem;
+		/* iOS Safari shows no scrollbar, arrows or dots: a half-visible next
+		   card + a fade at the right edge are the only "swipe me" hints */
+		grid-auto-columns: 75%;
 		gap: 1rem;
+		mask-image: linear-gradient(to right, #000 90%, rgba(0, 0, 0, .35));
+	}
+
+	/* touch: swipe is enough, and the edge mask would clip the outside arrows */
+	.wca-speakers-mini .wp-block-post-template::scroll-button(*) {
+		display: none;
 	}
 }
 /* ======================== END OF HOME KEYPOINTS ======================== */
