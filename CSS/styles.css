@@ -2078,9 +2078,22 @@ body.wca-bg-cream {
 
 /* ======================== START OF ATTENDEE LIST ======================== */
 /*--- Attendees list (.tix-attendee-list) — round avatars + names, per Figma
-   (node 385-2217). Component-scoped so it works on any attendees list; the
-   volunteers page keeps its own smaller avatar (more specific legacy rule).
+   (node 385-2217). Component-scoped so it works on any attendees list,
+   volunteers page included (2025 50px-avatar rule by CL removed 2026-11-25).
    No font-family — the name inherits the site's configured font. 2026-07 */
+/* space between a heading/paragraph above and the list (shortcode output has none) */
+#tix-attendees {
+	margin-top: 2.5rem;
+}
+
+/* hide a heading placed right before an attendees shortcode that matched nobody
+   (e.g. has_admin_flag="photographer" with 0 flagged): CampTix still prints an
+   empty #tix-attendees > ul. 2026-11 */
+.wp-block-heading:has(+ #tix-attendees):not(:has(+ #tix-attendees li)),
+#tix-attendees:not(:has(li)) {
+	display: none;
+}
+
 .tix-attendee-list {
 	list-style: none;
 	margin: 0;
@@ -2138,6 +2151,10 @@ body.wca-bg-cream {
 }
 
 @media (max-width: 767px) {
+	#tix-attendees {
+		margin-top: 1.5rem;
+	}
+
 	.tix-attendee-list {
 		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 		gap: 2rem 1rem;
@@ -2155,15 +2172,6 @@ body.wca-bg-cream {
 	}
 }
 /* ======================== END OF ATTENDEE LIST ======================== */
-
-/* 2025/11/18 Volunteers page fix by CL */
-.page-slug-volunteers .tix-attendee-list li {
-	margin-block: 3rem;
-}
-
-.page-slug-volunteers .tix-attendee-list .avatar {
-	width: 50px !important;
-}
 
 /* Language switching*/
 /* Hide the English version of the page by default */
