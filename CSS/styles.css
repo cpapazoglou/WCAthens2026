@@ -1818,25 +1818,28 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 	border-radius: 50%;
 	background-color: #fff;
 	padding: 0;
+	/* chevron, CSS only (sanitizer drops data: URLs): two straight bars forming
+	   the top + right edge of a small square, then the whole round button is
+	   rotated so that corner points right (or left). The circle looks the same. */
+	background-image: linear-gradient(#0d266b, #0d266b), linear-gradient(#0d266b, #0d266b);
 	background-repeat: no-repeat;
-	background-size: .55rem .55rem;
+	background-size: 12px 3px, 3px 12px;
+	background-position: 11px 15px, 20px 15px;
 	cursor: pointer;
-	box-shadow: 0 2px 6px rgba(13, 38, 107, .2);
+	box-shadow: 0 0 6px rgba(13, 38, 107, .25);
 	transition: background-color .2s ease, color .2s ease, opacity .2s ease;
 }
 
 .wca-speakers-mini .wp-block-post-template::scroll-button(left) {
 	content: "" / "Προηγούμενοι";
-	background-image: linear-gradient(to bottom right, transparent calc(50% - 1.5px), #0d266b calc(50% - 1.5px), #0d266b calc(50% + 1.5px), transparent calc(50% + 1.5px)), linear-gradient(to top right, transparent calc(50% - 1.5px), #0d266b calc(50% - 1.5px), #0d266b calc(50% + 1.5px), transparent calc(50% + 1.5px));
-	background-position: calc(50% - 1px) calc(50% - .27rem), calc(50% - 1px) calc(50% + .27rem);
 	left: -.75rem;
+	transform: rotate(-135deg);
 }
 
 .wca-speakers-mini .wp-block-post-template::scroll-button(right) {
 	content: "" / "Επόμενοι";
-	background-image: linear-gradient(to bottom left, transparent calc(50% - 1.5px), #0d266b calc(50% - 1.5px), #0d266b calc(50% + 1.5px), transparent calc(50% + 1.5px)), linear-gradient(to top left, transparent calc(50% - 1.5px), #0d266b calc(50% - 1.5px), #0d266b calc(50% + 1.5px), transparent calc(50% + 1.5px));
-	background-position: calc(50% + 1px) calc(50% - .27rem), calc(50% + 1px) calc(50% + .27rem);
 	right: -.75rem;
+	transform: rotate(45deg);
 }
 
 .lang-en .wca-speakers-mini .wp-block-post-template::scroll-button(left) {
@@ -1851,16 +1854,7 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 .wca-speakers-mini .wp-block-post-template::scroll-button(*):focus-visible {
 	background-color: #1333A6;
 	border-color: #1333A6;
-}
-
-.wca-speakers-mini .wp-block-post-template::scroll-button(left):hover,
-.wca-speakers-mini .wp-block-post-template::scroll-button(left):focus-visible {
-	background-image: linear-gradient(to bottom right, transparent calc(50% - 1.5px), #fff calc(50% - 1.5px), #fff calc(50% + 1.5px), transparent calc(50% + 1.5px)), linear-gradient(to top right, transparent calc(50% - 1.5px), #fff calc(50% - 1.5px), #fff calc(50% + 1.5px), transparent calc(50% + 1.5px));
-}
-
-.wca-speakers-mini .wp-block-post-template::scroll-button(right):hover,
-.wca-speakers-mini .wp-block-post-template::scroll-button(right):focus-visible {
-	background-image: linear-gradient(to bottom left, transparent calc(50% - 1.5px), #fff calc(50% - 1.5px), #fff calc(50% + 1.5px), transparent calc(50% + 1.5px)), linear-gradient(to top left, transparent calc(50% - 1.5px), #fff calc(50% - 1.5px), #fff calc(50% + 1.5px), transparent calc(50% + 1.5px));
+	background-image: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff);
 }
 
 .wca-speakers-mini .wp-block-post-template::scroll-button(*):disabled {
