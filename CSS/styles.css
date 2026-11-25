@@ -1748,14 +1748,167 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 	background: transparent !important;
 }
 
-/*--- speakers: small square boxes so everyone fits ---*/
+/*--- speakers: horizontal slider (scroll-snap, no JS), next card peeks ---*/
+/* card = avatar + name + post-excerpt (role) + wordcamp/speaker-sessions (talk).
+   Native scroll: swipe on touch, scrollbar / shift+wheel on desktop. 2026-11
+   NOTE: the Remote CSS sanitizer (2026-11) strips scroll-snap-type,
+   scroll-marker-group, scrollbar-width and scrollbar-color (not on its
+   property allowlist) and data: URLs. Those rules below are inert on live
+   until WordCamp allows them; snap, dots and the thin scrollbar need them. */
 .wca-speakers-mini .wp-block-post-template {
 	list-style: none;
 	margin: 0;
-	padding: 0;
+	padding: 0 0 1rem;
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(min(7.5rem, 100%), 1fr));
-	gap: var(--wp--preset--spacing--20) 1rem;
+	grid-template-columns: none;
+	grid-auto-flow: column;
+	grid-auto-columns: 13rem;
+	gap: 1.25rem;
+	overflow-x: auto;
+	overscroll-behavior-x: contain;
+	scroll-snap-type: x mandatory;
+}
+
+/* Firefox only: thin blue scrollbar. Kept out of Safari/Chrome because setting
+   scrollbar-width/-color there disables the ::-webkit-scrollbar styles below. */
+@supports (-moz-appearance: none) {
+	.wca-speakers-mini .wp-block-post-template {
+		scrollbar-width: thin;
+		scrollbar-color: var(--wp--preset--color--custom-eastern-blue-100) transparent;
+	}
+}
+
+/* Safari: a styled scrollbar is always visible (macOS hides the default one
+   until you scroll), so mouse users get a bar to drag. Chrome hides it below
+   in favour of arrows + dots. */
+.wca-speakers-mini .wp-block-post-template::-webkit-scrollbar {
+	height: 8px;
+}
+
+.wca-speakers-mini .wp-block-post-template::-webkit-scrollbar-track {
+	background: rgba(13, 38, 107, .12);
+	border-radius: 8px;
+}
+
+.wca-speakers-mini .wp-block-post-template::-webkit-scrollbar-thumb {
+	background: var(--wp--preset--color--custom-eastern-blue-100);
+	border-radius: 8px;
+}
+
+/* snap-stop: arrows move one speaker per click (not a whole page) */
+.wca-speakers-mini .wp-block-post-template > li {
+	scroll-snap-align: start;
+	scroll-snap-stop: always;
+}
+
+/* arrows for mouse users: CSS carousel ::scroll-button (Chrome/Edge 135+ only;
+   other browsers ignore it and keep plain scroll). Buttons scroll one page and
+   disable themselves at the ends. 2026-11 */
+.wca-speakers-mini {
+	position: relative;
+}
+
+.wca-speakers-mini .wp-block-post-template::scroll-button(*) {
+	position: absolute;
+	top: 5.5rem;
+	z-index: 2;
+	width: 2.75rem;
+	height: 2.75rem;
+	border: 3px solid var(--wp--preset--color--custom-eastern-blue-100);
+	border-radius: 50%;
+	background-color: #fff;
+	padding: 0;
+	background-repeat: no-repeat;
+	background-size: .55rem .55rem;
+	cursor: pointer;
+	box-shadow: 0 2px 6px rgba(13, 38, 107, .2);
+	transition: background-color .2s ease, color .2s ease, opacity .2s ease;
+}
+
+.wca-speakers-mini .wp-block-post-template::scroll-button(left) {
+	content: "" / "Προηγούμενοι";
+	background-image: linear-gradient(to bottom right, transparent calc(50% - 1.5px), #0d266b calc(50% - 1.5px), #0d266b calc(50% + 1.5px), transparent calc(50% + 1.5px)), linear-gradient(to top right, transparent calc(50% - 1.5px), #0d266b calc(50% - 1.5px), #0d266b calc(50% + 1.5px), transparent calc(50% + 1.5px));
+	background-position: calc(50% - 1px) calc(50% - .27rem), calc(50% - 1px) calc(50% + .27rem);
+	left: -.75rem;
+}
+
+.wca-speakers-mini .wp-block-post-template::scroll-button(right) {
+	content: "" / "Επόμενοι";
+	background-image: linear-gradient(to bottom left, transparent calc(50% - 1.5px), #0d266b calc(50% - 1.5px), #0d266b calc(50% + 1.5px), transparent calc(50% + 1.5px)), linear-gradient(to top left, transparent calc(50% - 1.5px), #0d266b calc(50% - 1.5px), #0d266b calc(50% + 1.5px), transparent calc(50% + 1.5px));
+	background-position: calc(50% + 1px) calc(50% - .27rem), calc(50% + 1px) calc(50% + .27rem);
+	right: -.75rem;
+}
+
+.lang-en .wca-speakers-mini .wp-block-post-template::scroll-button(left) {
+	content: "" / "Previous";
+}
+
+.lang-en .wca-speakers-mini .wp-block-post-template::scroll-button(right) {
+	content: "" / "Next";
+}
+
+.wca-speakers-mini .wp-block-post-template::scroll-button(*):hover,
+.wca-speakers-mini .wp-block-post-template::scroll-button(*):focus-visible {
+	background-color: #1333A6;
+	border-color: #1333A6;
+}
+
+.wca-speakers-mini .wp-block-post-template::scroll-button(left):hover,
+.wca-speakers-mini .wp-block-post-template::scroll-button(left):focus-visible {
+	background-image: linear-gradient(to bottom right, transparent calc(50% - 1.5px), #fff calc(50% - 1.5px), #fff calc(50% + 1.5px), transparent calc(50% + 1.5px)), linear-gradient(to top right, transparent calc(50% - 1.5px), #fff calc(50% - 1.5px), #fff calc(50% + 1.5px), transparent calc(50% + 1.5px));
+}
+
+.wca-speakers-mini .wp-block-post-template::scroll-button(right):hover,
+.wca-speakers-mini .wp-block-post-template::scroll-button(right):focus-visible {
+	background-image: linear-gradient(to bottom left, transparent calc(50% - 1.5px), #fff calc(50% - 1.5px), #fff calc(50% + 1.5px), transparent calc(50% + 1.5px)), linear-gradient(to top left, transparent calc(50% - 1.5px), #fff calc(50% - 1.5px), #fff calc(50% + 1.5px), transparent calc(50% + 1.5px));
+}
+
+.wca-speakers-mini .wp-block-post-template::scroll-button(*):disabled {
+	opacity: 0;
+	cursor: default;
+}
+
+/* arrows/dots glide instead of jumping */
+.wca-speakers-mini .wp-block-post-template {
+	scroll-behavior: smooth;
+	scroll-marker-group: after;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.wca-speakers-mini .wp-block-post-template {
+		scroll-behavior: auto;
+	}
+}
+
+/* dots under the slider, one per speaker, current one wide (same browser
+   support as the arrows) */
+.wca-speakers-mini .wp-block-post-template::scroll-marker-group {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: .4rem;
+	margin-top: .75rem;
+}
+
+.wca-speakers-mini .wp-block-post-template > li::scroll-marker {
+	content: "";
+	width: .55rem;
+	height: .55rem;
+	border-radius: 1rem;
+	background: rgba(13, 38, 107, .25);
+	transition: width .2s ease, background-color .2s ease;
+}
+
+.wca-speakers-mini .wp-block-post-template > li::scroll-marker:target-current {
+	width: 1.5rem;
+	background: var(--wp--preset--color--custom-eastern-blue-100);
+}
+
+/* dots replace the scrollbar where supported; others keep the scrollbar */
+@supports selector(::scroll-marker) {
+	.wca-speakers-mini .wp-block-post-template {
+		scrollbar-width: none;
+	}
 }
 
 .wca-speakers-mini .wp-block-post-template > li {
@@ -1811,9 +1964,14 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 	filter: saturate(1.15);
 }
 
-.wca-speakers-mini .wp-block-post:is(:hover, :focus-within) .wp-block-post-title a {
+/* theme underline offset is 9px (line sat on the role text): pin a tight one,
+   same whether the card or the name itself is hovered */
+.wca-speakers-mini .wp-block-post:is(:hover, :focus-within) .wp-block-post-title a,
+.wca-speakers-mini .wp-block-post-title a:hover {
 	color: #1333A6;
 	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1836,10 +1994,69 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 	color: var(--wp--preset--color--custom-eastern-blue-100);
 }
 
+/* role line = speaker excerpt ("Role – Company" + bio), cut to 2 lines */
+.wca-speakers-mini .wp-block-post-excerpt {
+	margin: .25rem 0 0;
+	font-size: .8rem;
+	line-height: 1.35;
+	color: var(--wp--preset--color--custom-eastern-blue-100);
+	opacity: .75;
+}
+
+.wca-speakers-mini .wp-block-post-excerpt__excerpt {
+	margin: 0;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+.wca-speakers-mini .wp-block-post-excerpt__more-text {
+	display: none;
+}
+
+/* talk title(s), cut to 3 lines each */
+.wca-speakers-mini .wp-block-wordcamp-speaker-sessions {
+	list-style: none;
+	margin: .5rem 0 0;
+	padding: .5rem 0 0;
+	border-top: 1px solid rgba(13, 38, 107, .15);
+	font-size: .85rem;
+	line-height: 1.35;
+	font-weight: 600;
+}
+
+.wca-speakers-mini .wp-block-wordcamp-speaker-sessions li + li {
+	margin-top: .35rem;
+}
+
+.wca-speakers-mini .wp-block-wordcamp-speaker-sessions p {
+	margin: 0;
+	font-size: inherit !important;
+	line-height: inherit !important;
+	font-family: inherit !important;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+}
+
+.wca-speakers-mini .wp-block-wordcamp-speaker-sessions a {
+	font-size: inherit !important;
+	font-weight: inherit !important;
+	color: var(--wp--preset--color--custom-eastern-blue-100);
+	text-decoration: none;
+}
+
+.wca-speakers-mini .wp-block-wordcamp-speaker-sessions a:is(:hover, :focus-visible) {
+	color: #1333A6;
+	text-decoration: underline;
+}
+
 @media (max-width: 767px) {
 	.wca-speakers-mini .wp-block-post-template {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 1rem .75rem;
+		grid-auto-columns: 10rem;
+		gap: 1rem;
 	}
 }
 /* ======================== END OF HOME KEYPOINTS ======================== */
