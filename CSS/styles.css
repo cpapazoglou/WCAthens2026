@@ -1908,6 +1908,98 @@ main:has(> .wp-block-post-content > .wp-block-query .wca-news) > .wp-block-space
 	}
 }
 
+/* Firefox desktop: no ::scroll-button arrows and the sanitizer strips the
+   scrollbar styles, so a mouse cannot move the slider. There the speakers run
+   as an endless marquee instead; it pauses on hover / keyboard focus.
+   Markup (Site Editor), in place of the speakers Query:
+   - Group, class wca-speakers-marquee (clips the edges)
+     - Group (Row, no wrap), class wca-speakers-track
+       - the speakers Query (class wca-speakers-mini)
+       - the same Query again (duplicate): the second copy makes the loop
+         seamless and is hidden in every other browser.
+   Track = 2 copies + 1 gap, so moving it by half its width + half a gap lands
+   copy 2 exactly where copy 1 started.
+   The sanitizer (CSSTidy) keeps only ONE level of at-rule, so no @media inside
+   @supports: touch / small screens / reduced motion are undone in a separate
+   @media below. 2026-11 */
+.wca-speakers-track {
+	display: block !important;
+}
+
+.wca-speakers-track > .wca-speakers-mini {
+	margin: 0 !important;
+	max-width: none !important;
+}
+
+.wca-speakers-track > .wca-speakers-mini ~ .wca-speakers-mini {
+	display: none !important;
+}
+
+@supports (-moz-appearance: none) {
+	.wca-speakers-marquee {
+		overflow: hidden;
+	}
+
+	div.wca-speakers-track {
+		display: flex !important;
+		flex-wrap: nowrap !important;
+		gap: 1.25rem;
+		width: max-content;
+		max-width: none !important;
+		animation: wca-speakers-marquee 80s linear infinite;
+	}
+
+	.wca-speakers-marquee:hover .wca-speakers-track,
+	.wca-speakers-marquee:focus-within .wca-speakers-track {
+		animation-play-state: paused;
+	}
+
+	div.wca-speakers-track > .wca-speakers-mini ~ .wca-speakers-mini {
+		display: block !important;
+	}
+
+	.wca-speakers-track .wca-speakers-mini .wp-block-post-template {
+		width: max-content;
+		max-width: none !important;
+		overflow: visible;
+		padding-bottom: 0;
+	}
+}
+
+/* touch, small screens, reduced motion: the normal slider again, Firefox too.
+   These values equal the defaults, so other browsers see no change. */
+@media (hover: none), (pointer: coarse), (max-width: 767px), (prefers-reduced-motion: reduce) {
+	.wca-speakers-marquee {
+		overflow: visible;
+	}
+
+	div.wca-speakers-track.wca-speakers-track {
+		display: block !important;
+		width: auto;
+		animation: none;
+	}
+
+	div.wca-speakers-track.wca-speakers-track > .wca-speakers-mini ~ .wca-speakers-mini {
+		display: none !important;
+	}
+
+	.wca-speakers-track .wca-speakers-mini .wp-block-post-template {
+		width: auto;
+		max-width: 100% !important;
+		overflow-x: auto;
+		padding-bottom: 1rem;
+	}
+}
+
+@keyframes wca-speakers-marquee {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(calc(-50% - .625rem));
+	}
+}
+
 .wca-speakers-mini .wp-block-post-template > li {
 	margin: 0 !important;
 }
